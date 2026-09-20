@@ -14,16 +14,198 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      core_members: {
+        Row: {
+          id: string
+          initials: string
+          name: string
+          role_title: string
+          sort_order: number
+        }
+        Insert: {
+          id?: string
+          initials: string
+          name: string
+          role_title: string
+          sort_order?: number
+        }
+        Update: {
+          id?: string
+          initials?: string
+          name?: string
+          role_title?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      journal_posts: {
+        Row: {
+          author: string
+          excerpt: string
+          id: string
+          kicker: string
+          published_on: string
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          author: string
+          excerpt: string
+          id?: string
+          kicker: string
+          published_on: string
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          author?: string
+          excerpt?: string
+          id?: string
+          kicker?: string
+          published_on?: string
+          sort_order?: number
+          title?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          batch_year: string
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+        }
+        Insert: {
+          batch_year?: string
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id: string
+        }
+        Update: {
+          batch_year?: string
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+        }
+        Relationships: []
+      }
+      session_registrations: {
+        Row: {
+          created_at: string
+          id: string
+          session_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          session_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          session_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "session_registrations_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sessions: {
+        Row: {
+          capacity: number | null
+          created_at: string
+          date_label: string
+          description: string
+          id: string
+          kicker: string
+          meta: string
+          note: string | null
+          registration_open: boolean
+          slug: string
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          capacity?: number | null
+          created_at?: string
+          date_label: string
+          description: string
+          id?: string
+          kicker: string
+          meta: string
+          note?: string | null
+          registration_open?: boolean
+          slug: string
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          capacity?: number | null
+          created_at?: string
+          date_label?: string
+          description?: string
+          id?: string
+          kicker?: string
+          meta?: string
+          note?: string | null
+          registration_open?: boolean
+          slug?: string
+          sort_order?: number
+          title?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      session_seat_counts: {
+        Args: never
+        Returns: {
+          session_id: string
+          taken: number
+        }[]
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "member"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +332,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "member"],
+    },
   },
 } as const
