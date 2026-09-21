@@ -1,10 +1,12 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
+import { amIAdmin } from "@/lib/srf.functions";
 
 const NAV = [
   { to: "/", label: "Home" },
