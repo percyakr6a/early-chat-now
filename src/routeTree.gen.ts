@@ -16,6 +16,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as JournalRouteImport } from './routes/journal'
 import { Route as MembersRouteImport } from './routes/members'
 import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedMySessionsRouteImport } from './routes/_authenticated/my-sessions'
 
 const IndexRoute = IndexRouteImport.update({
@@ -52,6 +53,11 @@ const ProjectsRoute = ProjectsRouteImport.update({
   path: '/projects',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedMySessionsRoute = AuthenticatedMySessionsRouteImport.update({
   id: '/my-sessions',
   path: '/my-sessions',
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/journal': typeof JournalRoute
   '/members': typeof MembersRoute
   '/projects': typeof ProjectsRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/my-sessions': typeof AuthenticatedMySessionsRoute
 }
 export interface FileRoutesByTo {
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/journal': typeof JournalRoute
   '/members': typeof MembersRoute
   '/projects': typeof ProjectsRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/my-sessions': typeof AuthenticatedMySessionsRoute
 }
 export interface FileRoutesById {
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/journal': typeof JournalRoute
   '/members': typeof MembersRoute
   '/projects': typeof ProjectsRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/my-sessions': typeof AuthenticatedMySessionsRoute
 }
 export interface FileRouteTypes {
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/journal'
     | '/members'
     | '/projects'
+    | '/admin'
     | '/my-sessions'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
     | '/journal'
     | '/members'
     | '/projects'
+    | '/admin'
     | '/my-sessions'
   id:
     | '__root__'
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '/journal'
     | '/members'
     | '/projects'
+    | '/_authenticated/admin'
     | '/_authenticated/my-sessions'
   fileRoutesById: FileRoutesById
 }
@@ -179,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/my-sessions': {
       id: '/_authenticated/my-sessions'
       path: '/my-sessions'
@@ -190,10 +209,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedMySessionsRoute: typeof AuthenticatedMySessionsRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedMySessionsRoute: AuthenticatedMySessionsRoute,
 }
 
