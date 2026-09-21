@@ -21,6 +21,12 @@ export function Header() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
+  const checkAdmin = useServerFn(amIAdmin);
+  const admin = useQuery({
+    queryKey: ["am-i-admin"],
+    queryFn: () => checkAdmin(),
+    enabled: Boolean(user),
+  });
 
   async function signOut() {
     await queryClient.cancelQueries();
