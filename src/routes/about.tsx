@@ -6,12 +6,12 @@ const STEPS = [
   {
     n: "01",
     title: "Attend Workshops",
-    body: "Start with a clinical curiosity, a lived observation, or a problem worth understanding.",
+    body: "Start with a clinical curiosity, a lived observation, or a problem worth understanding and learn to solve it.",
   },
   {
     n: "02",
     title: "Make Research Studies",
-    body: "Build a reading list, a protocol, a survey, or a first imperfect draft with other students.",
+    body: "Build a reading list, a protocol, a survey, or a first imperfect draft with other students and complete it in record time.",
   },
   {
     n: "03",
