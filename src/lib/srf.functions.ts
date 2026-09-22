@@ -158,13 +158,20 @@ export const getAllRegistrations = createServerFn({ method: "GET" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data, error } = await supabaseAdmin
       .from("session_registrations")
-      .select("id, created_at, sessions(title), profiles(full_name, batch_year, email)")
+      .select("id, created_at, user_id, sessions(title)")
       .order("created_at", { ascending: false });
     if (error) throw new Error(error.message);
 
-    return (data ?? []).map((row) => {
+    const rows = data ?? [];
+    const userIds = [...new Set(rows.map((r) => r.user_id))];
+    const { data: profileRows } = userIds.length
+      ? await supabaseAdmin.from("profiles").select("id, full_name, batch_year, email").in("id", userIds)
+      : { data: [] as { id: string; full_name: string | null; batch_year: string | null; email: string | null }[] };
+    const profileMap = new Map((profileRows ?? []).map((p) => [p.id, p]));
+
+    return rows.map((row) => {
       const session = row.sessions as { title: string } | null;
-      const profile = row.profiles as { full_name: string; batch_year: string; email: string | null } | null;
+      const profile = profileMap.get(row.user_id);
       return {
         id: row.id,
         created_at: row.created_at,
