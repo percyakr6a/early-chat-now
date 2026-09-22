@@ -34,11 +34,8 @@ function Members() {
 
       <section className="px-5 py-20 md:px-10">
         <div className="mx-auto max-w-[1400px]">
-          <p className="max-w-2xl text-xl leading-relaxed text-navy">{"\n"}</p>
-
-          <div className="mt-16">
+          <div>
             <SectionLabel>Core Team 2026</SectionLabel>
-            <h2 className="mt-6 max-w-3xl text-4xl leading-[0.95] text-navy md:text-6xl">{"\n"}</h2>
             <p className="mt-6 max-w-2xl text-lg text-navy/70">
               Each core has a head, co-head, and associate working together to keep the forum moving.
             </p>
