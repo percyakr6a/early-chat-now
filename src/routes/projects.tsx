@@ -36,19 +36,15 @@ function Projects() {
       <section className="px-5 py-20 md:px-10 md:py-24">
         <div className="mx-auto max-w-[1400px]">
           <p className="max-w-2xl text-xl leading-relaxed text-navy">
-            Workshops, short-term projects, and open sessions for students who would rather learn by
-            trying.
+             Med-ed workshops, short-term research paper projects, and open discourse sessions for students who would rather learn by trying together.
           </p>
 
-          <div className="mt-16">
-            <SectionLabel>Upcoming / open sessions</SectionLabel>
+           <div className="mt-16">
+             <SectionLabel>UPCOMING / OPEN SESSIONS / TERM-1</SectionLabel>
             <h2 className="mt-6 max-w-3xl text-4xl leading-[0.95] text-navy md:text-6xl">
               Choose a door <span className="text-navy/40">into the work.</span>
             </h2>
-            <p className="mt-6 max-w-2xl text-lg text-navy/70">
-              Every session has a clear invitation. Pick the one that makes you want to ask a follow-up
-              question.
-            </p>
+             <p className="mt-6 max-w-2xl text-lg text-navy/70"></p>
           </div>
 
           <div className="mt-14">
