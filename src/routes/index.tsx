@@ -98,7 +98,9 @@ function Home() {
             One good question <span className="text-navy/40">at a time.</span>
           </h2>
           <p className="mt-6 max-w-xl text-lg text-navy/70">
-            Upcoming sessions, working groups, and experiments from the SRF CMC calendar.
+            Upcoming sessions, research groups, and experiments from the&nbsp;
+            <br />
+            SRF CMC calendar.
           </p>
           <div className="mt-14">
             <SessionList sessions={sessions} />
@@ -114,7 +116,7 @@ function Home() {
           </h2>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-navy/70">
             You don't need a publication. You don't need to know the answer. You just need a reason to
-            look closer.
+            look closer. And we'll work on it together.
           </p>
           <Link
             to="/projects"

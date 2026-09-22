@@ -1,6 +1,12 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { amIAdmin } from "@/lib/srf.functions";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -11,7 +17,23 @@ const NAV = [
 ] as const;
 
 export function Header() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
+  const checkAdmin = useServerFn(amIAdmin);
+  const admin = useQuery({
+    queryKey: ["am-i-admin"],
+    queryFn: () => checkAdmin(),
+    enabled: Boolean(user),
+  });
+
+  async function signOut() {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await supabase.auth.signOut();
+    navigate({ to: "/auth", replace: true });
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
@@ -39,6 +61,23 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+          {user ? (
+            <>
+              <Link
+                to="/my-sessions"
+                activeProps={{ className: "bg-navy/10 text-navy" }}
+                className="rounded-lg px-4 py-2 text-sm font-semibold text-navy/70 transition-colors hover:text-navy"
+              >
+                My sessions
+              </Link>
+              <button
+                onClick={signOut}
+                className="rounded-lg px-4 py-2 text-sm font-semibold text-navy/70 transition-colors hover:text-navy"
+              >
+                Sign out
+              </button>
+            </>
+          ) : null}
           <Link
             to="/projects"
             className="ml-2 rounded-xl bg-lime px-5 py-3 text-sm font-bold text-navy shadow-[0_4px_0_0_var(--navy)] transition-transform hover:-translate-y-0.5"
@@ -68,6 +107,31 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+          {user ? (
+            <>
+              <Link
+                to="/my-sessions"
+                onClick={() => setOpen(false)}
+                className="rounded-lg px-3 py-2 text-base font-semibold text-navy"
+              >
+                My sessions
+              </Link>
+              <button
+                onClick={signOut}
+                className="rounded-lg px-3 py-2 text-left text-base font-semibold text-navy"
+              >
+                Sign out
+              </button>
+            </>
+          ) : (
+            <Link
+              to="/auth"
+              onClick={() => setOpen(false)}
+              className="rounded-lg px-3 py-2 text-base font-semibold text-navy"
+            >
+              Sign in
+            </Link>
+          )}
           <Link
             to="/projects"
             onClick={() => setOpen(false)}

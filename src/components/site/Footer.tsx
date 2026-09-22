@@ -18,7 +18,7 @@ export function Footer() {
           <a href="mailto:srf.cmc@forum.edu" className="hover:text-lime">srf.cmc@forum.edu</a>
         </div>
         <p className="label-mono mt-12 text-primary-foreground/60">
-          CMC Larkana / Student-led / Politics-free
+          CMC LARKANA / STUDENT-LED / RESEARCH-ORIENTED
         </p>
       </div>
     </footer>
