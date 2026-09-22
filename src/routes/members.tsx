@@ -41,7 +41,7 @@ function Members() {
           <div className="mt-16">
             <SectionLabel>Core Team 2026</SectionLabel>
             <h2 className="mt-6 max-w-3xl text-4xl leading-[0.95] text-navy md:text-6xl">
-              Convener first. <span className="text-navy/40">Then the cores.</span>
+              Work first. <span className="text-navy/40">Then the titles.</span>
             </h2>
             <p className="mt-6 max-w-2xl text-lg text-navy/70">
               Each core has a head, co-head, and associate working together to keep the forum moving.
