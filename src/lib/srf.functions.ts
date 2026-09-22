@@ -63,13 +63,6 @@ export const getSessions = createServerFn({ method: "GET" }).handler(async (): P
   }));
 });
 
-export const getJournalPosts = createServerFn({ method: "GET" }).handler(async () => {
-  const { data } = await publicClient()
-    .from("journal_posts")
-    .select("id, kicker, title, excerpt, author, published_on")
-    .order("sort_order");
-  return data ?? [];
-});
 
 export const getCoreMembers = createServerFn({ method: "GET" }).handler(async () => {
   const { data } = await publicClient()
