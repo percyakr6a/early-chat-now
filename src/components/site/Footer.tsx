@@ -14,7 +14,6 @@ export function Footer() {
           <Link to="/about" className="hover:text-lime">About</Link>
           <Link to="/members" className="hover:text-lime">Members</Link>
           <Link to="/projects" className="hover:text-lime">Projects</Link>
-          <Link to="/journal" className="hover:text-lime">Journal</Link>
           <a href="mailto:srf.cmc@forum.edu" className="hover:text-lime">srf.cmc@forum.edu</a>
         </div>
         <p className="label-mono mt-12 text-primary-foreground/60">
