@@ -27,7 +27,7 @@ export function SessionList({ sessions }: { sessions: SessionRow[] }) {
             {session.note ? <p className="mt-4 text-sm font-semibold text-navy/60">{session.note}</p> : null}
           </div>
 
-          <div className="mt-10 border-t border-navy/10 pt-6">
+          <div className="mt-auto border-t border-navy/10 pt-6">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <span className="label-mono text-navy/60">{session.meta}</span>
               <a
