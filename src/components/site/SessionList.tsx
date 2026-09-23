@@ -12,7 +12,7 @@ export function SessionList({ sessions }: { sessions: SessionRow[] }) {
           key={session.id}
           className="flex flex-col justify-between rounded-3xl border border-navy/15 bg-card p-8 transition-shadow hover:shadow-[0_18px_40px_-28px_var(--navy)]"
         >
-          <div>
+          <div className="flex flex-1 flex-col">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <span className="label-mono rounded-full bg-lime px-3 py-1 text-navy">{session.kicker}</span>
               <span className="label-mono inline-flex items-center gap-2 rounded-full border border-navy/20 px-3 py-1 text-navy/70">
@@ -27,7 +27,7 @@ export function SessionList({ sessions }: { sessions: SessionRow[] }) {
             {session.note ? <p className="mt-4 text-sm font-semibold text-navy/60">{session.note}</p> : null}
           </div>
 
-          <div className="mt-10 border-t border-navy/10 pt-6">
+          <div className="mt-auto border-t border-navy/10 pt-6">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <span className="label-mono text-navy/60">{session.meta}</span>
               <a
