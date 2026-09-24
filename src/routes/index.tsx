@@ -43,24 +43,23 @@ function Home() {
             <span className="h-px w-8 bg-lime" /> SRF / CMC / 2026
           </p>
           <h1 className="mt-10 max-w-5xl text-[3.25rem] leading-[0.86] md:text-[7.5rem]">
-            your <span className="text-cyan">home-grown</span> research forum.
+            introducing a real <span className="text-cyan">research culture.</span>
           </h1>
           <p className="mt-10 max-w-xl text-lg leading-relaxed text-primary-foreground/85">
-            A student-led research forum for the curious, the collaborative, and anyone who has ever
-            asked: “How can I do research at CMC?”
+            If you've ever questioned, "How can I do proper research that gets published?" - then SRF-CMC is the answer for you.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
               to="/projects"
               className="inline-flex items-center gap-3 rounded-xl bg-lime px-6 py-4 text-sm font-bold text-navy transition-transform hover:-translate-y-0.5"
             >
-              See what's happening <ArrowRight className="size-4" />
+              our latest projects <ArrowRight className="size-4" />
             </Link>
             <Link
               to="/about"
               className="inline-flex items-center rounded-xl border border-primary-foreground/30 px-6 py-4 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary-foreground/10"
             >
-              Meet the forum
+              meet the team behind
             </Link>
           </div>
         </div>
