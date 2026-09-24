@@ -46,7 +46,7 @@ function Home() {
             introducing a real <span className="text-cyan">research culture.</span>
           </h1>
           <p className="mt-10 max-w-xl text-lg leading-relaxed text-primary-foreground/85">
-            If you've ever questioned, "How can I do proper research that gets published at CHANDKA?" - then SRF-CMC is the answer for you.
+            If you've ever questioned, "How can I do proper research that gets published at Chandka?" - then SRF-CMC is the answer for you.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
