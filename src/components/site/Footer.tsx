@@ -14,7 +14,7 @@ export function Footer() {
           <Link to="/about" className="hover:text-lime">About</Link>
           <Link to="/members" className="hover:text-lime">Members</Link>
           <Link to="/projects" className="hover:text-lime">Projects</Link>
-          <a href="https://www.instagram.com/srfcmc/" target="_top" className="inline-flex items-center gap-2 rounded-full border border-lime px-4 py-1.5 text-lime hover:bg-lime hover:text-navy">Contact us</a>
+          <Link to="/contact" className="inline-flex items-center gap-2 rounded-full border border-lime px-4 py-1.5 text-lime hover:bg-lime hover:text-navy">Contact us</Link>
         </div>
         <p className="label-mono mt-12 text-primary-foreground/60">
           CMC LARKANA / STUDENT-LED / RESEARCH-ORIENTED
