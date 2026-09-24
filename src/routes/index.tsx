@@ -56,7 +56,7 @@ function Home() {
               our latest projects <ArrowRight className="size-4" />
             </Link>
             <Link
-              to="/about"
+              to="/members"
               className="inline-flex items-center rounded-xl border border-primary-foreground/30 px-6 py-4 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary-foreground/10"
             >
               meet the team behind
