@@ -28,7 +28,7 @@ export const Route = createFileRoute("/contact")({
 function Contact() {
   return (
     <PageShell>
-      <PageHero eyebrow="Contact / Instagram">
+      <PageHero eyebrow="CONTACT / SOCIALS">
         Let&apos;s talk <span className="text-navy/40">research.</span>
       </PageHero>
 
