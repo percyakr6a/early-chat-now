@@ -38,36 +38,42 @@ function Contact() {
       <section className="px-5 py-20 md:px-10 md:py-28">
         <div className="mx-auto max-w-[1400px]">
           <p className="label-mono text-navy/60">Reach us</p>
-          <div className="mt-8 flex flex-col items-start gap-8">
+          <div className="mt-8 flex flex-col items-start gap-12">
             <div>
-              <p className="label-mono text-navy/40">Instagram</p>
+              <p className="text-4xl leading-[0.95] text-navy md:text-6xl">
+                Instagram
+              </p>
               <a
                 href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 inline-block break-all text-4xl leading-[0.95] text-navy transition-colors hover:text-navy/60 md:text-6xl"
+                className="label-mono mt-4 inline-block text-navy/60 underline-offset-4 transition-colors hover:text-navy hover:underline"
               >
-                {INSTAGRAM_ADDRESS}
+                {INSTAGRAM_ADDRESS} ↗
               </a>
             </div>
             <div>
-              <p className="label-mono text-navy/40">X (Twitter)</p>
+              <p className="text-4xl leading-[0.95] text-navy md:text-6xl">
+                X (Twitter)
+              </p>
               <a
                 href={X_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 inline-block break-all text-4xl leading-[0.95] text-navy transition-colors hover:text-navy/60 md:text-6xl"
+                className="label-mono mt-4 inline-block text-navy/60 underline-offset-4 transition-colors hover:text-navy hover:underline"
               >
-                {X_ADDRESS}
+                {X_ADDRESS} ↗
               </a>
             </div>
             <div>
-              <p className="label-mono text-navy/40">Email</p>
+              <p className="text-4xl leading-[0.95] text-navy md:text-6xl">
+                Email
+              </p>
               <a
                 href={`mailto:${EMAIL_ADDRESS}`}
-                className="mt-3 inline-block break-all text-4xl leading-[0.95] text-navy transition-colors hover:text-navy/60 md:text-6xl"
+                className="label-mono mt-4 inline-block text-navy/60 underline-offset-4 transition-colors hover:text-navy hover:underline"
               >
-                {EMAIL_ADDRESS}
+                {EMAIL_ADDRESS} ↗
               </a>
             </div>
           </div>
