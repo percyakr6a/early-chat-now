@@ -1,10 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Check, Copy } from "lucide-react";
-import { useState } from "react";
 
 import { PageHero, PageShell } from "@/components/site/PageShell";
-import { Button } from "@/components/ui/button";
 
+const INSTAGRAM_URL = "https://www.instagram.com/srfcmc/";
 const INSTAGRAM_ADDRESS = "instagram.com/srfcmc";
 
 export const Route = createFileRoute("/contact")({
@@ -28,14 +26,6 @@ export const Route = createFileRoute("/contact")({
 });
 
 function Contact() {
-  const [copied, setCopied] = useState(false);
-
-  async function copyAddress() {
-    await navigator.clipboard.writeText(`https://www.${INSTAGRAM_ADDRESS}/`);
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 2000);
-  }
-
   return (
     <PageShell>
       <PageHero eyebrow="Contact / Instagram">
@@ -47,17 +37,16 @@ function Contact() {
           <p className="label-mono text-navy/60">Our Instagram</p>
           <p className="mt-5 text-3xl font-semibold text-navy md:text-5xl">@srfcmc</p>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-navy/70">
-            Copy the address below and paste it into Safari to visit our profile.
+            Tap the address below to open our profile.
           </p>
-          <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-            <span className="label-mono break-all border-b border-navy/20 pb-2 text-navy">
-              {INSTAGRAM_ADDRESS}
-            </span>
-            <Button type="button" onClick={copyAddress} className="bg-navy text-primary-foreground hover:bg-navy/90">
-              {copied ? <Check aria-hidden="true" /> : <Copy aria-hidden="true" />}
-              {copied ? "Copied" : "Copy address"}
-            </Button>
-          </div>
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="label-mono mt-10 inline-block break-all border-b border-navy/20 pb-2 text-navy transition-colors hover:border-lime hover:text-navy"
+          >
+            {INSTAGRAM_ADDRESS}
+          </a>
         </div>
       </section>
     </PageShell>
