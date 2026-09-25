@@ -4,6 +4,9 @@ import { PageHero, PageShell } from "@/components/site/PageShell";
 
 const INSTAGRAM_URL = "https://www.instagram.com/srfcmc/";
 const INSTAGRAM_ADDRESS = "instagram.com/srfcmc";
+const X_URL = "https://x.com/srfcmc";
+const X_ADDRESS = "x.com/srfcmc";
+const EMAIL_ADDRESS = "convener.srfcmc@gmail.com";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
