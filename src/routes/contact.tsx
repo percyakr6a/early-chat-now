@@ -40,7 +40,7 @@ function Contact() {
           <p className="label-mono text-navy/60">Reach us</p>
           <div className="mt-8 flex flex-col items-start gap-12">
             <div>
-              <p className="text-4xl leading-[0.95] text-navy md:text-6xl">
+              <p className="text-4xl font-bold leading-[0.95] text-navy md:text-6xl">
                 Instagram
               </p>
               <a
@@ -53,7 +53,7 @@ function Contact() {
               </a>
             </div>
             <div>
-              <p className="text-4xl leading-[0.95] text-navy md:text-6xl">
+              <p className="text-4xl font-bold leading-[0.95] text-navy md:text-6xl">
                 X (Twitter)
               </p>
               <a
@@ -66,7 +66,7 @@ function Contact() {
               </a>
             </div>
             <div>
-              <p className="text-4xl leading-[0.95] text-navy md:text-6xl">
+              <p className="text-4xl font-bold leading-[0.95] text-navy md:text-6xl">
                 Email
               </p>
               <a
