@@ -45,7 +45,7 @@ function Contact() {
                 href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="label-mono mt-2 inline-block break-all border-b border-navy/20 pb-2 text-2xl text-navy transition-colors hover:border-lime md:text-3xl"
+                className="mt-3 inline-block break-all text-4xl leading-[0.95] text-navy transition-colors hover:text-navy/60 md:text-6xl"
               >
                 {INSTAGRAM_ADDRESS}
               </a>
@@ -56,7 +56,7 @@ function Contact() {
                 href={X_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="label-mono mt-2 inline-block break-all border-b border-navy/20 pb-2 text-2xl text-navy transition-colors hover:border-lime md:text-3xl"
+                className="mt-3 inline-block break-all text-4xl leading-[0.95] text-navy transition-colors hover:text-navy/60 md:text-6xl"
               >
                 {X_ADDRESS}
               </a>
@@ -65,7 +65,7 @@ function Contact() {
               <p className="label-mono text-navy/40">Email</p>
               <a
                 href={`mailto:${EMAIL_ADDRESS}`}
-                className="label-mono mt-2 inline-block break-all border-b border-navy/20 pb-2 text-2xl text-navy transition-colors hover:border-lime md:text-3xl"
+                className="mt-3 inline-block break-all text-4xl leading-[0.95] text-navy transition-colors hover:text-navy/60 md:text-6xl"
               >
                 {EMAIL_ADDRESS}
               </a>
