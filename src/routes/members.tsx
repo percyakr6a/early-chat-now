@@ -23,6 +23,21 @@ export const Route = createFileRoute("/members")({
   component: Members,
 });
 
+const VOLUNTEERS = [
+  {
+    team: "FOR ORGANSIING",
+    people: ["HABIBA AKRAM (Y2 MBBS)", "IQRA PANHWAR (Y1 MBBS)"],
+  },
+  {
+    team: "FOR MEDIA",
+    people: ["ARPUN KUKREJA (Y2 MBBS)", "FATIMA RAFIQUE (Y1 MBBS)"],
+  },
+  {
+    team: "FOR RESEARCH",
+    people: ["ABDUL RAFIU (Y2 MBBS)", "JAWAD SHEIKH (Y1 MBBS)"],
+  },
+];
+
 function Members() {
   const members = Route.useLoaderData();
 
