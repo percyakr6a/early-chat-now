@@ -49,12 +49,14 @@ function Home() {
             If you've ever questioned, "How can I do proper research that gets published at Chandka?" - then SRF-CMC is the answer for you.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
-            <Link
-              to="/projects"
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfvBsCOakZttAD-ti6hj-Q04AWTCN3a43cGDB6lU5kFatJBjQ/viewform?usp=dialog"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-3 rounded-xl bg-lime px-6 py-4 text-sm font-bold text-navy transition-transform hover:-translate-y-0.5"
             >
               our latest projects <ArrowRight className="size-4" />
-            </Link>
+            </a>
             <Link
               to="/members"
               className="inline-flex items-center rounded-xl border border-primary-foreground/30 px-6 py-4 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary-foreground/10"
