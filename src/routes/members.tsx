@@ -58,8 +58,30 @@ function Members() {
               </div>
             ))}
           </div>
+
+          <div className="mt-20">
+            <SectionLabel>Volunteers 2026</SectionLabel>
+            <div className="mt-8 grid gap-6 sm:grid-cols-3">
+              {VOLUNTEERS.map((group) => (
+                <div
+                  key={group.team}
+                  className="rounded-2xl border border-navy/10 p-6"
+                >
+                  <span className="label-mono text-navy/40">{group.team}</span>
+                  <ul className="mt-4 space-y-2">
+                    {group.people.map((person) => (
+                      <li key={person} className="text-lg text-navy">
+                        {person}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
+
 
       <section className="bg-navy px-5 py-24 text-primary-foreground md:px-10">
         <div className="mx-auto grid max-w-[1400px] gap-12 md:grid-cols-2">
