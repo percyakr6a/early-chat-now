@@ -1,12 +1,8 @@
+import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 
 import type { SessionRow } from "@/lib/srf.functions";
-
-const GOOGLE_FORM_URL = "https://forms.gle/";
-const FORM_URLS: Record<string, string> = {
-  "bls-project":
-    "https://docs.google.com/forms/d/e/1FAIpQLSfvBsCOakZttAD-ti6hj-Q04AWTCN3a43cGDB6lU5kFatJBjQ/viewform?usp=dialog",
-};
+import { formUrlFor } from "@/lib/project-links";
 
 export function SessionList({ sessions }: { sessions: SessionRow[] }) {
   return (
@@ -33,7 +29,15 @@ export function SessionList({ sessions }: { sessions: SessionRow[] }) {
             </div>
 
             <span className="label-mono mt-6 block text-navy/60">{session.date_label}</span>
-            <h3 className="mt-3 text-3xl leading-[1.02] text-navy md:text-4xl">{session.title}</h3>
+            <h3 className="mt-3 text-3xl leading-[1.02] text-navy md:text-4xl">
+              <Link
+                to="/projects/$slug"
+                params={{ slug: session.slug }}
+                className="transition-colors hover:text-navy/70"
+              >
+                {session.title}
+              </Link>
+            </h3>
             <p className="mt-4 max-w-lg text-base leading-relaxed text-navy/70">{session.description}</p>
             {session.note ? <p className="mt-4 text-sm font-semibold text-navy/60">{session.note}</p> : null}
           </div>
@@ -42,7 +46,7 @@ export function SessionList({ sessions }: { sessions: SessionRow[] }) {
             <div className="flex flex-wrap items-center justify-between gap-4">
               <span className="label-mono text-navy/60">{session.meta}</span>
               <a
-                href={FORM_URLS[session.slug] ?? GOOGLE_FORM_URL}
+                href={formUrlFor(session.slug)}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-xl bg-lime px-5 py-3 text-sm font-bold text-navy transition-transform hover:-translate-y-0.5"
