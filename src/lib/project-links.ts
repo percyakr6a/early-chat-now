@@ -1,6 +1,6 @@
 export const PROJECT_LINKS = [
   { slug: "bls-project", label: "The CPR Project" },
-  { slug: "research-discourse-journal-club", label: "Research Discourse / Journal Club" },
+  { slug: "research-discourse", label: "Research Discourse / Journal Club" },
 ] as const;
 
 const GOOGLE_FORM_URL = "https://forms.gle/";
