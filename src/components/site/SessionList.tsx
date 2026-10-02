@@ -42,7 +42,7 @@ export function SessionList({ sessions }: { sessions: SessionRow[] }) {
             <div className="flex flex-wrap items-center justify-between gap-4">
               <span className="label-mono text-navy/60">{session.meta}</span>
               <a
-                href={GOOGLE_FORM_URL}
+                href={FORM_URLS[session.slug] ?? GOOGLE_FORM_URL}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-xl bg-lime px-5 py-3 text-sm font-bold text-navy transition-transform hover:-translate-y-0.5"
@@ -50,7 +50,9 @@ export function SessionList({ sessions }: { sessions: SessionRow[] }) {
                 Fill via Google Form <ArrowUpRight className="size-4" />
               </a>
             </div>
-            <p className="label-mono mt-4 text-navy/60">Registration starts by 1 Oct</p>
+            <p className="label-mono mt-4 text-navy/60">
+              {session.registration_open ? "Registrations are open" : "Registration starts by 1 Oct"}
+            </p>
           </div>
         </article>
       ))}
