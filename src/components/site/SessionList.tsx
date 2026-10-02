@@ -3,6 +3,10 @@ import { ArrowUpRight } from "lucide-react";
 import type { SessionRow } from "@/lib/srf.functions";
 
 const GOOGLE_FORM_URL = "https://forms.gle/";
+const FORM_URLS: Record<string, string> = {
+  "bls-project":
+    "https://docs.google.com/forms/d/e/1FAIpQLSfvBsCOakZttAD-ti6hj-Q04AWTCN3a43cGDB6lU5kFatJBjQ/viewform?usp=dialog",
+};
 
 export function SessionList({ sessions }: { sessions: SessionRow[] }) {
   return (
@@ -15,10 +19,17 @@ export function SessionList({ sessions }: { sessions: SessionRow[] }) {
           <div className="flex flex-1 flex-col">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <span className="label-mono rounded-full bg-lime px-3 py-1 text-navy">{session.kicker}</span>
-              <span className="label-mono inline-flex items-center gap-2 rounded-full border border-navy/20 px-3 py-1 text-navy/70">
-                <span className="size-2 rounded-full bg-amber-400" aria-hidden="true" />
-                Curriculum finalising
-              </span>
+              {session.registration_open ? (
+                <span className="label-mono inline-flex items-center gap-2 rounded-full border border-navy/20 px-3 py-1 text-navy/70">
+                  <span className="size-2 rounded-full bg-lime" aria-hidden="true" />
+                  Registrations ongoing
+                </span>
+              ) : (
+                <span className="label-mono inline-flex items-center gap-2 rounded-full border border-navy/20 px-3 py-1 text-navy/70">
+                  <span className="size-2 rounded-full bg-amber-400" aria-hidden="true" />
+                  Curriculum finalising
+                </span>
+              )}
             </div>
 
             <span className="label-mono mt-6 block text-navy/60">{session.date_label}</span>
@@ -31,7 +42,7 @@ export function SessionList({ sessions }: { sessions: SessionRow[] }) {
             <div className="flex flex-wrap items-center justify-between gap-4">
               <span className="label-mono text-navy/60">{session.meta}</span>
               <a
-                href={GOOGLE_FORM_URL}
+                href={FORM_URLS[session.slug] ?? GOOGLE_FORM_URL}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-xl bg-lime px-5 py-3 text-sm font-bold text-navy transition-transform hover:-translate-y-0.5"
@@ -39,7 +50,9 @@ export function SessionList({ sessions }: { sessions: SessionRow[] }) {
                 Fill via Google Form <ArrowUpRight className="size-4" />
               </a>
             </div>
-            <p className="label-mono mt-4 text-navy/60">Registration starts by 1 Oct</p>
+            <p className="label-mono mt-4 text-navy/60">
+              {session.registration_open ? "Registrations are open" : "Registration starts by 1 Oct"}
+            </p>
           </div>
         </article>
       ))}
