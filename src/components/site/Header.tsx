@@ -1,16 +1,18 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { useState } from "react";
+
+import { PROJECT_LINKS } from "@/lib/project-links";
 
 const NAV = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/members", label: "Team" },
-  { to: "/projects", label: "Projects" },
 ] as const;
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [projectsOpen, setProjectsOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
@@ -38,6 +40,37 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+
+          <div className="group relative">
+            <Link
+              to="/projects"
+              activeProps={{ className: "bg-navy/10 text-navy" }}
+              className="flex items-center gap-1 rounded-lg px-4 py-2 text-sm font-semibold text-navy/70 transition-colors hover:text-navy"
+            >
+              Projects <ChevronDown className="size-4 transition-transform group-hover:rotate-180" />
+            </Link>
+            <div className="invisible absolute left-0 top-full w-72 pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
+              <div className="overflow-hidden rounded-2xl border border-navy/15 bg-card shadow-[0_18px_40px_-28px_var(--navy)]">
+                {PROJECT_LINKS.map((p) => (
+                  <Link
+                    key={p.slug}
+                    to="/projects/$slug"
+                    params={{ slug: p.slug }}
+                    className="block px-5 py-3 text-sm font-semibold text-navy/70 transition-colors hover:bg-navy/5 hover:text-navy"
+                  >
+                    {p.label}
+                  </Link>
+                ))}
+                <Link
+                  to="/projects"
+                  className="block border-t border-navy/10 px-5 py-3 text-sm font-bold text-navy transition-colors hover:bg-navy/5"
+                >
+                  All projects →
+                </Link>
+              </div>
+            </div>
+          </div>
+
           <Link
             to="/projects"
             className="ml-2 rounded-xl bg-lime px-5 py-3 text-sm font-bold text-navy shadow-[0_4px_0_0_var(--navy)] transition-transform hover:-translate-y-0.5"
@@ -67,6 +100,38 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+
+          <button
+            className="flex items-center justify-between rounded-lg px-3 py-2 text-base font-semibold text-navy"
+            onClick={() => setProjectsOpen((v) => !v)}
+            aria-expanded={projectsOpen}
+          >
+            Projects
+            <ChevronDown className={`size-4 transition-transform ${projectsOpen ? "rotate-180" : ""}`} />
+          </button>
+          {projectsOpen ? (
+            <div className="ml-3 flex flex-col gap-1 border-l border-navy/15 pl-3">
+              {PROJECT_LINKS.map((p) => (
+                <Link
+                  key={p.slug}
+                  to="/projects/$slug"
+                  params={{ slug: p.slug }}
+                  onClick={() => setOpen(false)}
+                  className="rounded-lg px-3 py-2 text-sm font-semibold text-navy/70"
+                >
+                  {p.label}
+                </Link>
+              ))}
+              <Link
+                to="/projects"
+                onClick={() => setOpen(false)}
+                className="rounded-lg px-3 py-2 text-sm font-bold text-navy"
+              >
+                All projects →
+              </Link>
+            </div>
+          ) : null}
+
           <Link
             to="/projects"
             onClick={() => setOpen(false)}
