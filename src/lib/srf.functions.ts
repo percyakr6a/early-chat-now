@@ -62,6 +62,21 @@ export const getSessions = createServerFn({ method: "GET" }).handler(async (): P
 });
 
 
+export const getSessionBySlug = createServerFn({ method: "GET" })
+  .inputValidator((slug: string) => slug)
+  .handler(async ({ data: slug }): Promise<SessionRow | null> => {
+    const supabase = publicClient();
+    const { data: s } = await supabase
+      .from("sessions")
+      .select("id, slug, kicker, date_label, title, description, note, meta, capacity, registration_open")
+      .eq("slug", slug)
+      .maybeSingle();
+    if (!s) return null;
+    const { data: counts } = await supabase.rpc("session_seat_counts");
+    const taken = (counts ?? []).find((c: { session_id: string }) => c.session_id === s.id);
+    return { ...s, taken: taken ? Number(taken.taken) : 0 };
+  });
+
 export const getCoreMembers = createServerFn({ method: "GET" }).handler(async () => {
   const { data } = await publicClient()
     .from("core_members")
