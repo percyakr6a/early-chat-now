@@ -55,7 +55,7 @@ function Home() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 rounded-xl bg-lime px-6 py-4 text-sm font-bold text-navy transition-transform hover:-translate-y-0.5"
             >
-              our latest projects <ArrowRight className="size-4" />
+              join our cpr project <ArrowRight className="size-4" />
             </a>
             <Link
               to="/members"
