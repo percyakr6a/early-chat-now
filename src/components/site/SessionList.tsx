@@ -3,6 +3,10 @@ import { ArrowUpRight } from "lucide-react";
 import type { SessionRow } from "@/lib/srf.functions";
 
 const GOOGLE_FORM_URL = "https://forms.gle/";
+const FORM_URLS: Record<string, string> = {
+  "bls-project":
+    "https://docs.google.com/forms/d/e/1FAIpQLSfvBsCOakZttAD-ti6hj-Q04AWTCN3a43cGDB6lU5kFatJBjQ/viewform?usp=dialog",
+};
 
 export function SessionList({ sessions }: { sessions: SessionRow[] }) {
   return (
