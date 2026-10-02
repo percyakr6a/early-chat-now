@@ -19,10 +19,17 @@ export function SessionList({ sessions }: { sessions: SessionRow[] }) {
           <div className="flex flex-1 flex-col">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <span className="label-mono rounded-full bg-lime px-3 py-1 text-navy">{session.kicker}</span>
-              <span className="label-mono inline-flex items-center gap-2 rounded-full border border-navy/20 px-3 py-1 text-navy/70">
-                <span className="size-2 rounded-full bg-amber-400" aria-hidden="true" />
-                Curriculum finalising
-              </span>
+              {session.registration_open ? (
+                <span className="label-mono inline-flex items-center gap-2 rounded-full border border-navy/20 px-3 py-1 text-navy/70">
+                  <span className="size-2 rounded-full bg-lime" aria-hidden="true" />
+                  Registrations ongoing
+                </span>
+              ) : (
+                <span className="label-mono inline-flex items-center gap-2 rounded-full border border-navy/20 px-3 py-1 text-navy/70">
+                  <span className="size-2 rounded-full bg-amber-400" aria-hidden="true" />
+                  Curriculum finalising
+                </span>
+              )}
             </div>
 
             <span className="label-mono mt-6 block text-navy/60">{session.date_label}</span>
