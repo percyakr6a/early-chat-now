@@ -34,6 +34,8 @@ export const Route = createFileRoute("/about")({
         property: "og:description",
         content: "A student-led, research-oriented forum built on one belief: learning research should be accessible to all.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: About,

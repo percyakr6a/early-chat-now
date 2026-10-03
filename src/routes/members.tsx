@@ -17,6 +17,8 @@ export const Route = createFileRoute("/members")({
         property: "og:description",
         content: "A rotating group of students behind the sessions' organisation, media, and research output.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   loader: () => getCoreMembers(),

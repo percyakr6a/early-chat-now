@@ -20,6 +20,8 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "Student-led, research-oriented, politics-free. Open to all MBBS batches at CMC Larkana.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   loader: () => getSessions(),
