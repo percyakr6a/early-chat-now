@@ -1,32 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 
 import { PageHero, PageShell, SectionLabel } from "@/components/site/PageShell";
 import { SessionList } from "@/components/site/SessionList";
 import { getSessions } from "@/lib/srf.functions";
 
 export const Route = createFileRoute("/projects")({
-  head: () => ({
-    meta: [
-      { title: "Projects — Upcoming SRF CMC sessions" },
-      {
-        name: "description",
-        content:
-          "Upcoming SRF CMC workshops and open sessions, including THE BLS PROJECT on 7 October at CMC Larkana. Register for a slot online.",
-      },
-      { property: "og:title", content: "Upcoming Projects — SRF CMC" },
-      {
-        property: "og:description",
-        content: "Workshops, short-term projects and open sessions for students who would rather learn by trying.",
-      },
-    ],
-  }),
   loader: () => getSessions(),
-  component: Projects,
+  component: () => <Outlet />,
 });
 
-function Projects() {
-  const sessions = Route.useLoaderData();
-
+export function ProjectsOverview({ sessions }: { sessions: Awaited<ReturnType<typeof getSessions>> }) {
   return (
     <PageShell>
       <PageHero eyebrow="The calendar / live">

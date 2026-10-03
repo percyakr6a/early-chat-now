@@ -1,6 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, CalendarDays, ChevronDown, HeartPulse } from "lucide-react";
+import { useState } from "react";
 
+import cprWorkshop from "@/assets/cpr-workshop.jpg";
+import { Button } from "@/components/ui/button";
+import { PageShell, SectionLabel } from "@/components/site/PageShell";
 import { getSessionBySlug } from "@/lib/srf.functions";
 import { formUrlFor } from "@/lib/project-links";
 
@@ -22,6 +26,8 @@ export const Route = createFileRoute("/projects/$slug")({
         property: "og:description",
         content: loaderData?.description ?? "A project by the Student Research Forum, CMC Larkana.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: ProjectDetail,
@@ -30,9 +36,10 @@ export const Route = createFileRoute("/projects/$slug")({
 
 function ProjectDetail() {
   const session = Route.useLoaderData();
+  if (session.slug === "bls-project") return <CPRProject session={session} />;
 
   return (
-    <div className="mx-auto max-w-[1100px] px-5 py-14 md:px-10 md:py-20">
+    <PageShell><div className="mx-auto max-w-[1100px] px-5 py-14 md:px-10 md:py-20">
       <Link
         to="/projects"
         className="label-mono inline-flex items-center gap-2 text-navy/60 transition-colors hover:text-navy"
@@ -75,7 +82,88 @@ function ProjectDetail() {
           {session.registration_open ? "Registrations are open" : "Registration starts by 1 Oct"}
         </p>
       </div>
-    </div>
+    </div></PageShell>
+  );
+}
+
+function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderData> }) {
+  const [showCountInfo, setShowCountInfo] = useState(false);
+
+  return (
+    <PageShell>
+      <section className="relative isolate flex min-h-[530px] items-end overflow-hidden bg-navy px-5 pb-16 pt-24 text-primary-foreground md:min-h-[620px] md:px-10 md:pb-20">
+        <img src={cprWorkshop} alt="Illustrative image of medical students practising CPR on a training manikin" width={1600} height={1008} className="absolute inset-0 -z-20 size-full object-cover object-center" />
+        <div className="absolute inset-0 -z-10 bg-navy/75" aria-hidden="true" />
+        <div className="mx-auto w-full max-w-[1400px]">
+          <Link to="/projects" className="label-mono inline-flex items-center gap-2 text-primary-foreground/85 transition-colors hover:text-primary-foreground">
+            <ArrowLeft className="size-4" /> All projects
+          </Link>
+          <p className="label-mono mt-12 text-lime">SRF CMC / HANDS-ON TRAINING</p>
+          <h1 className="mt-5 max-w-4xl text-5xl leading-[0.98] md:text-8xl">The CPR Project.</h1>
+          <p className="mt-7 max-w-2xl text-lg leading-relaxed text-primary-foreground md:text-xl">{session.description}</p>
+          <div className="mt-8 flex flex-wrap items-center gap-5">
+            <Button asChild variant="secondary" className="h-auto rounded-md px-6 py-4 font-bold">
+              <a href={formUrlFor(session.slug)} target="_blank" rel="noopener noreferrer">Register via Google Form <ArrowUpRight /></a>
+            </Button>
+            <span className="label-mono text-primary-foreground/85">{session.date_label}</span>
+          </div>
+          <p className="label-mono mt-8 text-primary-foreground/70">Illustrative image</p>
+        </div>
+      </section>
+
+      <section className="border-b border-border bg-lime px-5 py-8 md:px-10">
+        <div className="mx-auto max-w-[1400px]">
+          <Button
+            type="button"
+            variant="ghost"
+            aria-expanded={showCountInfo}
+            aria-controls="trained-count-info"
+            onClick={() => setShowCountInfo((current) => !current)}
+            className="h-auto w-full justify-between whitespace-normal rounded-md p-0 text-left text-navy hover:bg-transparent hover:text-navy md:w-auto md:gap-12"
+          >
+            <span className="flex items-center gap-5">
+              <span className="flex size-16 shrink-0 items-center justify-center rounded-full border border-navy/40 md:size-20"><HeartPulse className="size-8 md:size-10" strokeWidth={1.5} /></span>
+              <span className="flex flex-col items-start gap-1">
+                <span className="label-mono">Project impact</span>
+                <span className="text-2xl font-bold md:text-3xl">Students trained so far <span className="font-normal">—</span></span>
+              </span>
+            </span>
+            <ChevronDown className={`ml-4 size-5 shrink-0 transition-transform ${showCountInfo ? "rotate-180" : ""}`} />
+          </Button>
+          {showCountInfo && <p id="trained-count-info" className="mt-5 max-w-xl text-sm leading-relaxed text-navy/80">A verified training total has not been published yet. We’ll update this after attendance is confirmed.</p>}
+        </div>
+      </section>
+
+      <section className="px-5 py-16 md:px-10 md:py-24">
+        <div className="mx-auto max-w-[1400px]">
+          <SectionLabel>THE SESSION LOG</SectionLabel>
+          <div className="mt-10 grid gap-12 md:grid-cols-2 md:gap-16">
+            <div className="border-t-2 border-navy pt-6">
+              <p className="label-mono text-navy/60">01 / NEXT UP</p>
+              <h2 className="mt-5 text-3xl text-navy md:text-5xl">Upcoming session.</h2>
+              <div className="mt-8 flex items-start gap-4 border-t border-border pt-7">
+                <CalendarDays className="mt-1 size-6 shrink-0 text-navy" strokeWidth={1.5} />
+                <div>
+                  <p className="label-mono text-navy/60">{session.date_label}</p>
+                  <h3 className="mt-3 text-2xl text-navy">{session.title}</h3>
+                  <p className="mt-3 max-w-md text-base leading-relaxed text-navy/70">{session.description}</p>
+                  <p className="label-mono mt-5 text-navy/60">{session.meta}</p>
+                  {session.registration_open && <Button asChild variant="secondary" className="mt-7 h-auto rounded-md px-5 py-3 font-bold"><a href={formUrlFor(session.slug)} target="_blank" rel="noopener noreferrer">Register <ArrowUpRight /></a></Button>}
+                </div>
+              </div>
+            </div>
+            <div className="border-t-2 border-navy pt-6">
+              <p className="label-mono text-navy/60">02 / THE ARCHIVE</p>
+              <h2 className="mt-5 text-3xl text-navy md:text-5xl">Previous sessions.</h2>
+              <div className="mt-8 border-t border-border pt-7">
+                <p className="text-lg text-navy/70">No previous sessions listed yet.</p>
+                <p className="mt-3 max-w-md text-sm leading-relaxed text-navy/60">Past workshops will appear here once session details are available.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </PageShell>
   );
 }
 

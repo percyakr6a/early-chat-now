@@ -1,0 +1,3 @@
+- [ ] Expand the CPR project page with a description, interactive training total, registration, and session history/upcoming areas.
+- [ ] Verify the CPR and other project pages on desktop and mobile.
+- [ ] Replace the CPR page background with a workshop graphic inspired by the supplied reference, without copying its university branding or claims.
