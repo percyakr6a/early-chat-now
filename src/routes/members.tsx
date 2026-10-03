@@ -26,15 +26,15 @@ export const Route = createFileRoute("/members")({
 const VOLUNTEERS = [
   {
     team: "FOR ORGANSIING",
-    people: ["HABIBA AKRAM (Y2 MBBS)", "IQRA PANHWAR (Y1 MBBS)"],
+    people: ["Habiba Akram (Y2 MBBS)", "Iqra Panhwar (Y1 MBBS)"],
   },
   {
     team: "FOR MEDIA",
-    people: ["ARPUN KUKREJA (Y2 MBBS)", "FATIMA RAFIQUE (Y1 MBBS)"],
+    people: ["Arpun Kukreja (Y2 MBBS)", "Fatima Rafique (Y1 MBBS)"],
   },
   {
     team: "FOR RESEARCH",
-    people: ["ABDUL RAFIU (Y2 MBBS)", "JAWAD SHEIKH (Y1 MBBS)"],
+    people: ["Abdul Rafiu (Y2 MBBS)", "Jawad Sheikh (Y1 MBBS)"],
   },
 ];
 
