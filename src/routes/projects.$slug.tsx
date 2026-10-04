@@ -151,6 +151,7 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
               </div>
             ))}
           </div>
+          <p className="mt-6 text-base font-semibold text-navy/80">An e-certificate will be provided by the Directorate of Professional Health Education, SMBBMU.</p>
         </div>
       </section>
 
