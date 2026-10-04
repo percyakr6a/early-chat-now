@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowUpRight, CalendarDays, ChevronDown, HeartPulse } from "lucide-react";
 import { useState } from "react";
 
-import cprWorkshop from "@/assets/cpr-workshop.jpg";
+import cprWorkshop from "@/assets/cpr-workshop-poster.jpg";
 import { Button } from "@/components/ui/button";
 import { PageShell, SectionLabel } from "@/components/site/PageShell";
 import { getSessionBySlug } from "@/lib/srf.functions";
@@ -91,23 +91,23 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
 
   return (
     <PageShell>
-      <section className="relative isolate flex min-h-[530px] items-end overflow-hidden bg-navy px-5 pb-16 pt-24 text-primary-foreground md:min-h-[620px] md:px-10 md:pb-20">
+      <section className="relative isolate flex min-h-[530px] items-end overflow-hidden bg-background px-5 pb-16 pt-24 text-navy md:min-h-[620px] md:px-10 md:pb-20">
         <img src={cprWorkshop} alt="Illustrative image of medical students practising CPR on a training manikin" width={1600} height={1008} className="absolute inset-0 -z-20 size-full object-cover object-center" />
-        <div className="absolute inset-0 -z-10 bg-navy/75" aria-hidden="true" />
+        <div className="absolute inset-0 -z-10 bg-background/80 md:bg-background/35" aria-hidden="true" />
         <div className="mx-auto w-full max-w-[1400px]">
-          <Link to="/projects" className="label-mono inline-flex items-center gap-2 text-primary-foreground/85 transition-colors hover:text-primary-foreground">
+          <Link to="/projects" className="label-mono inline-flex items-center gap-2 text-navy/85 transition-colors hover:text-navy">
             <ArrowLeft className="size-4" /> All projects
           </Link>
-          <p className="label-mono mt-12 text-lime">SRF CMC / HANDS-ON TRAINING</p>
+          <p className="label-mono mt-12 text-navy/70">SRF CMC / HANDS-ON TRAINING</p>
           <h1 className="mt-5 max-w-4xl text-5xl leading-[0.98] md:text-8xl">The CPR Project.</h1>
-          <p className="mt-7 max-w-2xl text-lg leading-relaxed text-primary-foreground md:text-xl">{session.description}</p>
+          <p className="mt-7 max-w-2xl text-lg leading-relaxed text-navy md:text-xl">{session.description}</p>
           <div className="mt-8 flex flex-wrap items-center gap-5">
             <Button asChild variant="secondary" className="h-auto rounded-md px-6 py-4 font-bold">
               <a href={formUrlFor(session.slug)} target="_blank" rel="noopener noreferrer">Register via Google Form <ArrowUpRight /></a>
             </Button>
-            <span className="label-mono text-primary-foreground/85">{session.date_label}</span>
+            <span className="label-mono text-navy/85">{session.date_label}</span>
           </div>
-          <p className="label-mono mt-8 text-primary-foreground/70">Illustrative image</p>
+          <p className="label-mono mt-8 text-navy/70">Illustrative image</p>
         </div>
       </section>
 
