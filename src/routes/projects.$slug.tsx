@@ -134,6 +134,26 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
         </div>
       </section>
 
+      <section className="border-b border-border px-5 py-16 md:px-10 md:py-20">
+        <div className="mx-auto max-w-[1400px]">
+          <SectionLabel>QUICK FACTS</SectionLabel>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { label: "Eligibility", value: "Open to all SMBBMU students" },
+              { label: "Format", value: "Small-group hands-on, 25 per session" },
+              { label: "Fee", value: "Free of cost" },
+              { label: "Venue", value: "To be announced" },
+            ].map((fact) => (
+              <div key={fact.label} className="rounded-2xl border border-navy/15 bg-card p-6">
+                <p className="label-mono text-navy/60">{fact.label}</p>
+                <p className="mt-3 text-xl font-bold leading-snug text-navy">{fact.value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
       <section className="px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto max-w-[1400px]">
           <SectionLabel>THE SESSION LOG</SectionLabel>
