@@ -1,8 +1,9 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, ArrowUpRight, CalendarDays, ChevronDown, HeartPulse } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, BookOpen, CalendarDays, ChevronDown, HeartPulse } from "lucide-react";
 import { useState } from "react";
 
 import cprWorkshop from "@/assets/cpr-workshop-poster.jpg";
+import researchDiscourse from "@/assets/research-discourse-poster.jpg";
 import { Button } from "@/components/ui/button";
 import { PageShell, SectionLabel } from "@/components/site/PageShell";
 import { getSessionBySlug } from "@/lib/srf.functions";
@@ -37,6 +38,7 @@ export const Route = createFileRoute("/projects/$slug")({
 function ProjectDetail() {
   const session = Route.useLoaderData();
   if (session.slug === "bls-project") return <CPRProject session={session} />;
+  if (session.slug === "research-discourse") return <ResearchDiscourse session={session} />;
 
   return (
     <PageShell><div className="mx-auto max-w-[1100px] px-5 py-14 md:px-10 md:py-20">
@@ -180,6 +182,88 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
               <div className="mt-8 border-t border-border pt-7">
                 <p className="text-lg text-navy/70">No previous sessions listed yet.</p>
                 <p className="mt-3 max-w-md text-sm leading-relaxed text-navy/60">Past workshops will appear here once session details are available.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </PageShell>
+  );
+}
+
+function ResearchDiscourse({ session }: { session: ReturnType<typeof Route.useLoaderData> }) {
+  const [showCountInfo, setShowCountInfo] = useState(false);
+
+  return (
+    <PageShell>
+      <section className="relative isolate flex min-h-[530px] items-end overflow-hidden bg-background px-5 pb-16 pt-24 text-navy md:min-h-[620px] md:px-10 md:pb-20">
+        <img src={researchDiscourse} alt="Illustrative image of an open medical journal, research papers and a stethoscope on a desk" width={1600} height={1008} className="absolute inset-0 -z-20 size-full object-cover object-center" />
+        <div className="absolute inset-0 -z-10 bg-background/80 md:bg-background/35" aria-hidden="true" />
+        <div className="mx-auto w-full max-w-[1400px]">
+          <Link to="/projects" className="label-mono inline-flex items-center gap-2 text-navy/85 transition-colors hover:text-navy">
+            <ArrowLeft className="size-4" /> All projects
+          </Link>
+          <p className="label-mono mt-12 text-navy/70">SRF CMC / JOURNAL CLUB</p>
+          <h1 className="mt-5 max-w-4xl text-5xl leading-[0.98] md:text-8xl">Research Discourse.</h1>
+          <p className="mt-7 max-w-2xl text-lg leading-relaxed text-navy md:text-xl">{session.description}</p>
+          <div className="mt-8 flex flex-wrap items-center gap-5">
+            <span className="label-mono inline-flex items-center gap-2 rounded-full border border-navy/20 bg-background/60 px-3 py-1 text-navy/70">
+              <span className="size-2 rounded-full bg-amber-400" aria-hidden="true" />
+              Curriculum finalising
+            </span>
+            <span className="label-mono text-navy/85">{session.date_label}</span>
+          </div>
+          <p className="label-mono mt-8 text-navy/70">Illustrative image</p>
+        </div>
+      </section>
+
+      <section className="border-b border-border bg-lime px-5 py-8 md:px-10">
+        <div className="mx-auto max-w-[1400px]">
+          <Button
+            type="button"
+            variant="ghost"
+            aria-expanded={showCountInfo}
+            aria-controls="registered-count-info"
+            onClick={() => setShowCountInfo((current) => !current)}
+            className="h-auto w-full justify-between whitespace-normal rounded-md p-0 text-left text-navy hover:bg-transparent hover:text-navy md:w-auto md:gap-12"
+          >
+            <span className="flex items-center gap-5">
+              <span className="flex size-16 shrink-0 items-center justify-center rounded-full border border-navy/40 md:size-20"><BookOpen className="size-8 md:size-10" strokeWidth={1.5} /></span>
+              <span className="flex flex-col items-start gap-1">
+                <span className="label-mono">Project impact</span>
+                <span className="text-2xl font-bold md:text-3xl">Students registered so far <span className="font-bold">—</span></span>
+              </span>
+            </span>
+            <ChevronDown className={`ml-4 size-5 shrink-0 transition-transform ${showCountInfo ? "rotate-180" : ""}`} />
+          </Button>
+          {showCountInfo && <p id="registered-count-info" className="mt-5 max-w-xl text-sm leading-relaxed text-navy/80">A verified registration total has not been published yet. We’ll update this once forms close.</p>}
+        </div>
+      </section>
+
+      <section className="px-5 py-16 md:px-10 md:py-24">
+        <div className="mx-auto max-w-[1400px]">
+          <SectionLabel>THE SESSION LOG</SectionLabel>
+          <div className="mt-10 grid gap-12 md:grid-cols-2 md:gap-16">
+            <div className="border-t-2 border-navy pt-6">
+              <p className="label-mono text-navy/60">01 / NEXT UP</p>
+              <h2 className="mt-5 text-3xl text-navy md:text-5xl">Upcoming dates.</h2>
+              <div className="mt-8 flex items-start gap-4 border-t border-border pt-7">
+                <CalendarDays className="mt-1 size-6 shrink-0 text-navy" strokeWidth={1.5} />
+                <div>
+                  <p className="label-mono text-navy/60">{session.date_label}</p>
+                  <h3 className="mt-3 text-2xl text-navy">Journal Club — Session no. 1</h3>
+                  <p className="mt-3 max-w-md text-base leading-relaxed text-navy/70">Discuss the study we created out of this BLS workshop.</p>
+                  <p className="label-mono mt-5 text-navy/60">{session.meta}</p>
+                  {session.registration_open && <Button asChild variant="secondary" className="mt-7 h-auto rounded-md px-5 py-3 font-bold"><a href={formUrlFor(session.slug)} target="_blank" rel="noopener noreferrer">Register <ArrowUpRight /></a></Button>}
+                </div>
+              </div>
+            </div>
+            <div className="border-t-2 border-navy pt-6">
+              <p className="label-mono text-navy/60">02 / THE ARCHIVES</p>
+              <h2 className="mt-5 text-3xl text-navy md:text-5xl">Previous sessions.</h2>
+              <div className="mt-8 border-t border-border pt-7">
+                <p className="text-lg text-navy/70">No previous sessions listed yet.</p>
+                <p className="mt-3 max-w-md text-sm leading-relaxed text-navy/60">Past journal club meetings will appear here once session details are available.</p>
               </div>
             </div>
           </div>
