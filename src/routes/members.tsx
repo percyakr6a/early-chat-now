@@ -28,7 +28,7 @@ export const Route = createFileRoute("/members")({
 const VOLUNTEERS = [
   {
     team: "FOR ORGANSIING",
-    people: ["Habiba Akram (Y2 MBBS)", "Iqra Panhwar (Y1 MBBS)"],
+    people: ["Habiba Akram (Y2 MBBS)", "Abdul Rafiu (Y2 MBBS)"],
   },
   {
     team: "FOR MEDIA",
@@ -36,7 +36,7 @@ const VOLUNTEERS = [
   },
   {
     team: "FOR RESEARCH",
-    people: ["Abdul Rafiu (Y2 MBBS)", "Jawad Sheikh (Y1 MBBS)"],
+    people: ["Iqra Panhwar (Y2 MBBS)", "Jawad Sheikh (Y1 MBBS)"],
   },
 ];
 
