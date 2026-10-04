@@ -36,7 +36,7 @@ const VOLUNTEERS = [
   },
   {
     team: "FOR RESEARCH",
-    people: ["Iqra Panhwar (Y2 MBBS)", "Jawad Sheikh (Y1 MBBS)"],
+    people: ["Iqra Panhwar (Y1 MBBS)", "Jawad Sheikh (Y1 MBBS)"],
   },
 ];
 
