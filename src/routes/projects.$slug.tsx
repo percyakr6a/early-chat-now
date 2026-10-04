@@ -125,7 +125,7 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
               <span className="flex size-16 shrink-0 items-center justify-center rounded-full border border-navy/40 md:size-20"><HeartPulse className="size-8 md:size-10" strokeWidth={1.5} /></span>
               <span className="flex flex-col items-start gap-1">
                 <span className="label-mono">Project impact</span>
-                <span className="text-2xl font-bold md:text-3xl">Students trained so far <span className="font-bold"> 60</span></span>
+                <span className="text-2xl font-bold md:text-3xl">Students trained so far <span className="font-bold"> 75</span></span>
               </span>
             </span>
             <ChevronDown className={`ml-4 size-5 shrink-0 transition-transform ${showCountInfo ? "rotate-180" : ""}`} />
