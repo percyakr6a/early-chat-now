@@ -38,6 +38,7 @@ export const Route = createFileRoute("/projects/$slug")({
 function ProjectDetail() {
   const session = Route.useLoaderData();
   if (session.slug === "bls-project") return <CPRProject session={session} />;
+  if (session.slug === "research-discourse") return <ResearchDiscourse session={session} />;
 
   return (
     <PageShell><div className="mx-auto max-w-[1100px] px-5 py-14 md:px-10 md:py-20">
