@@ -100,7 +100,7 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
           </Link>
           <p className="label-mono mt-12 text-navy/70">SRF CMC / HANDS-ON TRAINING</p>
           <h1 className="mt-5 max-w-4xl text-5xl leading-[0.98] md:text-8xl">The CPR Project.</h1>
-          <p className="mt-7 max-w-2xl text-lg leading-relaxed text-navy md:text-xl">{session.description}</p>
+          <p className="mt-7 max-w-2xl text-lg leading-relaxed text-navy md:text-xl">Designed to introduce Basic-Life-Saving cardio-pulmonary resuscitation at Chandka with the objective of having it accessibly learned by everyone on-campus.</p>
           <div className="mt-8 flex flex-wrap items-center gap-5">
             <Button asChild variant="secondary" className="h-auto rounded-md px-6 py-4 font-bold">
               <a href={formUrlFor(session.slug)} target="_blank" rel="noopener noreferrer">Register via Google Form <ArrowUpRight /></a>
@@ -125,7 +125,7 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
               <span className="flex size-16 shrink-0 items-center justify-center rounded-full border border-navy/40 md:size-20"><HeartPulse className="size-8 md:size-10" strokeWidth={1.5} /></span>
               <span className="flex flex-col items-start gap-1">
                 <span className="label-mono">Project impact</span>
-                <span className="text-2xl font-bold md:text-3xl">Students trained so far <span className="font-normal">—</span></span>
+                <span className="text-2xl font-bold md:text-3xl">Students trained so far <span className="font-normal"> 60</span></span>
               </span>
             </span>
             <ChevronDown className={`ml-4 size-5 shrink-0 transition-transform ${showCountInfo ? "rotate-180" : ""}`} />
@@ -140,20 +140,20 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
           <div className="mt-10 grid gap-12 md:grid-cols-2 md:gap-16">
             <div className="border-t-2 border-navy pt-6">
               <p className="label-mono text-navy/60">01 / NEXT UP</p>
-              <h2 className="mt-5 text-3xl text-navy md:text-5xl">Upcoming session.</h2>
+              <h2 className="mt-5 text-3xl text-navy md:text-5xl">Upcoming dates.</h2>
               <div className="mt-8 flex items-start gap-4 border-t border-border pt-7">
                 <CalendarDays className="mt-1 size-6 shrink-0 text-navy" strokeWidth={1.5} />
                 <div>
                   <p className="label-mono text-navy/60">{session.date_label}</p>
-                  <h3 className="mt-3 text-2xl text-navy">{session.title}</h3>
-                  <p className="mt-3 max-w-md text-base leading-relaxed text-navy/70">{session.description}</p>
+                  <h3 className="mt-3 text-2xl text-navy">CPR Workshop no. 1</h3>
+                  <p className="mt-3 max-w-md text-base leading-relaxed text-navy/70">3 sessions planned of 25 members each, designed for sufficient hands-on training - Venue; TBA.</p>
                   <p className="label-mono mt-5 text-navy/60">{session.meta}</p>
                   {session.registration_open && <Button asChild variant="secondary" className="mt-7 h-auto rounded-md px-5 py-3 font-bold"><a href={formUrlFor(session.slug)} target="_blank" rel="noopener noreferrer">Register <ArrowUpRight /></a></Button>}
                 </div>
               </div>
             </div>
             <div className="border-t-2 border-navy pt-6">
-              <p className="label-mono text-navy/60">02 / THE ARCHIVE</p>
+              <p className="label-mono text-navy/60">02 / THE ARCHIVES</p>
               <h2 className="mt-5 text-3xl text-navy md:text-5xl">Previous sessions.</h2>
               <div className="mt-8 border-t border-border pt-7">
                 <p className="text-lg text-navy/70">No previous sessions listed yet.</p>
