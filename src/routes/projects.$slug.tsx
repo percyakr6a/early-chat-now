@@ -1,8 +1,9 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, ArrowUpRight, CalendarDays, ChevronDown, HeartPulse } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, BookOpen, CalendarDays, ChevronDown, HeartPulse } from "lucide-react";
 import { useState } from "react";
 
 import cprWorkshop from "@/assets/cpr-workshop-poster.jpg";
+import researchDiscourse from "@/assets/research-discourse-poster.jpg";
 import { Button } from "@/components/ui/button";
 import { PageShell, SectionLabel } from "@/components/site/PageShell";
 import { getSessionBySlug } from "@/lib/srf.functions";
