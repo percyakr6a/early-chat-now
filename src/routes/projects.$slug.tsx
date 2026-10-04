@@ -100,6 +100,7 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
           </Link>
           <p className="label-mono mt-12 text-navy/70">SRF CMC / HANDS-ON TRAINING</p>
           <h1 className="mt-5 max-w-4xl text-5xl leading-[0.98] md:text-8xl">The CPR Project.</h1>
+          <p className="label-mono mt-5 text-navy/70">A hands-on training programme by the Directorate of Professional Health Education, SMBBMU</p>
           <p className="mt-7 max-w-2xl text-lg leading-relaxed text-navy md:text-xl">Designed to introduce Basic-Life-Saving cardio-pulmonary resuscitation at Chandka with the objective of having it accessibly learned by everyone on-campus.</p>
           <div className="mt-8 flex flex-wrap items-center gap-5">
             <Button asChild variant="secondary" className="h-auto rounded-md px-6 py-4 font-bold">
