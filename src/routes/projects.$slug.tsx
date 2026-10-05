@@ -183,7 +183,7 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
                       return (
                         <div key={s.no}>
                           <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-                            <p className="label-mono text-navy/60">Session no. {s.no}</p>
+                            <p className="label-mono text-navy/60">SESSION NO. {s.no} -&nbsp;{s.filled}&nbsp;/&nbsp;{s.capacity}&nbsp;SEATS FILLED</p>
                             <p className="text-xs font-bold text-navy">{full ? "Full" : `${s.capacity - s.filled} spots left`}</p>
                           </div>
                           <div
@@ -193,7 +193,7 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
                           >
                             <div className={`h-full rounded-full ${full ? "bg-navy" : "bg-lime"}`} style={{ width: `${pct}%` }} />
                           </div>
-                          <p className="label-mono mt-0.5 text-xs text-navy/60">{s.filled} / {s.capacity} seats filled</p>
+                          <p className="label-mono mt-0.5 text-xs text-navy/60"></p>
                         </div>
                       );
                     })}
