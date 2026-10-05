@@ -16,12 +16,14 @@ export const Route = createFileRoute("/contact")({
       { title: "Contact SRF CMC — Student Research Forum" },
       {
         name: "description",
-        content: "Contact the Student Research Forum at Chandka Medical College on Instagram.",
+        content:
+          "Contact the Student Research Forum at Chandka Medical College on Instagram, X, LinkedIn, or by email.",
       },
       { property: "og:title", content: "Contact SRF CMC" },
       {
         property: "og:description",
-        content: "Find the Student Research Forum at Chandka Medical College on Instagram.",
+        content:
+          "Find the Student Research Forum at Chandka Medical College on Instagram, X, LinkedIn, or by email.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
