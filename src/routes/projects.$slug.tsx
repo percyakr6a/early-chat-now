@@ -88,6 +88,12 @@ function ProjectDetail() {
   );
 }
 
+const CPR_SESSIONS = [
+  { no: 1, filled: 25, capacity: 25 },
+  { no: 2, filled: 25, capacity: 25 },
+  { no: 3, filled: 18, capacity: 25 },
+];
+
 function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderData> }) {
   const [showCountInfo, setShowCountInfo] = useState(false);
 
@@ -167,10 +173,31 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
               <h2 className="mt-5 text-3xl text-navy md:text-5xl">Upcoming dates.</h2>
               <div className="mt-8 flex items-start gap-4 border-t border-border pt-7">
                 <CalendarDays className="mt-1 size-6 shrink-0 text-navy" strokeWidth={1.5} />
-                <div>
+                <div className="w-full max-w-md">
                   <p className="label-mono text-navy/60">{session.date_label}</p>
                   <h3 className="mt-3 text-2xl text-navy">CPR Workshop no. 1</h3>
-                  <p className="mt-3 max-w-md text-base leading-relaxed text-navy/70">3 sessions planned of 25 members each, designed for sufficient hands-on training - Venue; TBA.</p>
+                  <div className="mt-6 space-y-6">
+                    {CPR_SESSIONS.map((s) => {
+                      const full = s.filled >= s.capacity;
+                      const pct = Math.round((s.filled / s.capacity) * 100);
+                      return (
+                        <div key={s.no}>
+                          <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+                            <p className="label-mono text-navy/60">Session no. {s.no}</p>
+                            <p className="text-sm font-bold text-navy">{full ? "Full" : `${s.capacity - s.filled} spots left`}</p>
+                          </div>
+                          <div
+                            className="mt-2 h-3 overflow-hidden rounded-full bg-navy/10"
+                            role="img"
+                            aria-label={`Session no. ${s.no}: ${s.filled} of ${s.capacity} seats filled`}
+                          >
+                            <div className={`h-full rounded-full ${full ? "bg-navy" : "bg-lime"}`} style={{ width: `${pct}%` }} />
+                          </div>
+                          <p className="label-mono mt-1.5 text-navy/60">{s.filled} / {s.capacity} seats filled</p>
+                        </div>
+                      );
+                    })}
+                  </div>
                   <p className="label-mono mt-5 text-navy/60">{session.meta}</p>
                   {session.registration_open && <Button asChild variant="secondary" className="mt-7 h-auto rounded-md px-5 py-3 font-bold"><a href={formUrlFor(session.slug)} target="_blank" rel="noopener noreferrer">Register <ArrowUpRight /></a></Button>}
                 </div>
