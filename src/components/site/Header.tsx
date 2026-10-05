@@ -22,9 +22,9 @@ export function Header() {
             <span className="text-lg font-black lowercase leading-none">srf</span>
           </span>
           <span className="label-mono max-w-[9rem] font-semibold leading-[1.25] text-navy">
-            Student Research
+            STUDENT RESEARCH
             <br />
-            Forum / CMC
+            FORUM @ CMC
           </span>
         </Link>
 
