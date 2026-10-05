@@ -184,7 +184,7 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
                         <div key={s.no}>
                           <div className="flex flex-wrap items-baseline justify-between gap-x-4">
                             <p className="label-mono text-navy/60">Session no. {s.no}</p>
-                            <p className={`text-xs font-bold ${full ? "text-navy" : "text-navy"}`}>{full ? "Full" : `${s.capacity - s.filled} spots left`}</p>
+                            <p className="text-xs font-bold text-navy">{full ? "Full" : `${s.capacity - s.filled} spots left`}</p>
                           </div>
                           <div
                             className="mt-1.5 h-2 overflow-hidden rounded-full bg-navy/10"
