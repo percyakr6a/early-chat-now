@@ -88,6 +88,12 @@ function ProjectDetail() {
   );
 }
 
+const CPR_SESSIONS = [
+  { no: 1, filled: 25, capacity: 25 },
+  { no: 2, filled: 25, capacity: 25 },
+  { no: 3, filled: 18, capacity: 25 },
+];
+
 function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderData> }) {
   const [showCountInfo, setShowCountInfo] = useState(false);
 
