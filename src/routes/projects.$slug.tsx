@@ -176,7 +176,7 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
                 <div className="w-full max-w-md">
                   <p className="label-mono text-navy/60">{session.date_label}</p>
                   <h3 className="mt-3 text-2xl text-navy">CPR Workshop no. 1</h3>
-                  <div className="mt-6 space-y-6">
+                  <div className="mt-5 space-y-3.5">
                     {CPR_SESSIONS.map((s) => {
                       const full = s.filled >= s.capacity;
                       const pct = Math.round((s.filled / s.capacity) * 100);
@@ -184,16 +184,16 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
                         <div key={s.no}>
                           <div className="flex flex-wrap items-baseline justify-between gap-x-4">
                             <p className="label-mono text-navy/60">Session no. {s.no}</p>
-                            <p className="text-sm font-bold text-navy">{full ? "Full" : `${s.capacity - s.filled} spots left`}</p>
+                            <p className={`text-xs font-bold ${full ? "text-signal" : "text-navy"}`}>{full ? "Full" : `${s.capacity - s.filled} spots left`}</p>
                           </div>
                           <div
-                            className="mt-2 h-3 overflow-hidden rounded-full bg-navy/10"
+                            className="mt-1.5 h-2 overflow-hidden rounded-full bg-navy/10"
                             role="img"
                             aria-label={`Session no. ${s.no}: ${s.filled} of ${s.capacity} seats filled`}
                           >
-                            <div className={`h-full rounded-full ${full ? "bg-navy" : "bg-lime"}`} style={{ width: `${pct}%` }} />
+                            <div className={`h-full rounded-full ${full ? "bg-signal" : "bg-lime"}`} style={{ width: `${pct}%` }} />
                           </div>
-                          <p className="label-mono mt-1.5 text-navy/60">{s.filled} / {s.capacity} seats filled</p>
+                          <p className="label-mono mt-0.5 text-xs text-navy/60">{s.filled} / {s.capacity} seats filled</p>
                         </div>
                       );
                     })}
