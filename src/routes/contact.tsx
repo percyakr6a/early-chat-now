@@ -6,6 +6,8 @@ const INSTAGRAM_URL = "https://www.instagram.com/srfcmc/";
 const INSTAGRAM_ADDRESS = "instagram.com/srfcmc";
 const X_URL = "https://x.com/srfcmc";
 const X_ADDRESS = "x.com/srfcmc";
+const LINKEDIN_URL = "https://www.linkedin.com/company/srfcmc";
+const LINKEDIN_ADDRESS = "linkedin.com/company/srfcmc";
 const EMAIL_ADDRESS = "convener.srfcmc@gmail.com";
 
 export const Route = createFileRoute("/contact")({
@@ -14,12 +16,14 @@ export const Route = createFileRoute("/contact")({
       { title: "Contact SRF CMC — Student Research Forum" },
       {
         name: "description",
-        content: "Contact the Student Research Forum at Chandka Medical College on Instagram.",
+        content:
+          "Contact the Student Research Forum at Chandka Medical College on Instagram, X, LinkedIn, or by email.",
       },
       { property: "og:title", content: "Contact SRF CMC" },
       {
         property: "og:description",
-        content: "Find the Student Research Forum at Chandka Medical College on Instagram.",
+        content:
+          "Find the Student Research Forum at Chandka Medical College on Instagram, X, LinkedIn, or by email.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -63,6 +67,19 @@ function Contact() {
                 className="label-mono mt-4 inline-block text-navy/60 underline-offset-4 transition-colors hover:text-navy hover:underline"
               >
                 {X_ADDRESS} ↗
+              </a>
+            </div>
+            <div>
+              <p className="text-4xl font-bold leading-[0.95] text-navy md:text-6xl">
+                LinkedIn
+              </p>
+              <a
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="label-mono mt-4 inline-block text-navy/60 underline-offset-4 transition-colors hover:text-navy hover:underline"
+              >
+                {LINKEDIN_ADDRESS} ↗
               </a>
             </div>
             <div>
