@@ -198,7 +198,7 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
                       );
                     })}
                   </div>
-                  <p className="label-mono mt-5 text-navy/60">{session.meta}</p>
+                  <p className="label-mono mt-5 whitespace-pre-line text-navy/60">{session.meta}</p>
                   {session.registration_open && <Button asChild variant="secondary" className="mt-7 h-auto rounded-md px-5 py-3 font-bold"><a href={formUrlFor(session.slug)} target="_blank" rel="noopener noreferrer">Register <ArrowUpRight /></a></Button>}
                 </div>
               </div>
@@ -280,7 +280,7 @@ function ResearchDiscourse({ session }: { session: ReturnType<typeof Route.useLo
                   <p className="label-mono text-navy/60">{session.date_label}</p>
                   <h3 className="mt-3 text-2xl text-navy">Journal Club — Session no. 1</h3>
                   <p className="mt-3 max-w-md text-base leading-relaxed text-navy/70">Discuss the study we created out of this BLS workshop.</p>
-                  <p className="label-mono mt-5 text-navy/60">{session.meta}</p>
+                  <p className="label-mono mt-5 whitespace-pre-line text-navy/60">{session.meta}</p>
                   {session.registration_open && <Button asChild variant="secondary" className="mt-7 h-auto rounded-md px-5 py-3 font-bold"><a href={formUrlFor(session.slug)} target="_blank" rel="noopener noreferrer">Register <ArrowUpRight /></a></Button>}
                 </div>
               </div>
