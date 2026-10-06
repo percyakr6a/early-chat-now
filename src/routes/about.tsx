@@ -21,6 +21,7 @@ const STEPS = [
 ];
 
 export const Route = createFileRoute("/about")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "About — SRF CMC Student Research Forum" },

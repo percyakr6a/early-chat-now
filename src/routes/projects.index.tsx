@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ProjectsOverview, Route as ProjectsRoute } from "./projects";
 
 export const Route = createFileRoute("/projects/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Projects — Upcoming SRF CMC sessions" },

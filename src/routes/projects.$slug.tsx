@@ -10,6 +10,7 @@ import { getSessionBySlug } from "@/lib/srf.functions";
 import { formUrlFor } from "@/lib/project-links";
 
 export const Route = createFileRoute("/projects/$slug")({
+  staticData: { sitemap: true },
   loader: async ({ params }) => {
     const session = await getSessionBySlug({ data: params.slug });
     if (!session) throw notFound();
