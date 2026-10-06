@@ -70,7 +70,7 @@ function Members() {
                 <span className="flex size-14 items-center justify-center rounded-2xl bg-navy text-lg font-bold text-primary-foreground">
                   {member.initials}
                 </span>
-                <h3 className="text-2xl text-navy md:text-3xl">{member.name}</h3>
+                <h2 className="text-2xl text-navy md:text-3xl">{member.name}</h2>
                 <span className="label-mono text-navy/60">{member.role_title}</span>
               </div>
             ))}
