@@ -81,6 +81,7 @@ const LazyErrorComponent = lazy(() =>
 );
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { charSet: "utf-8" },

@@ -11,6 +11,7 @@ const LINKEDIN_ADDRESS = "linkedin.com/company/srfcmc";
 const EMAIL_ADDRESS = "convener.srfcmc@gmail.com";
 
 export const Route = createFileRoute("/contact")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Contact SRF CMC — Student Research Forum" },

@@ -7,6 +7,7 @@ import { Ticker } from "@/components/site/Ticker";
 import { getSessions } from "@/lib/srf.functions";
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "SRF CMC — Student Research Forum, Chandka Medical College" },

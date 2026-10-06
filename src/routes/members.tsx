@@ -4,6 +4,7 @@ import { PageHero, PageShell, SectionLabel } from "@/components/site/PageShell";
 import { getCoreMembers } from "@/lib/srf.functions";
 
 export const Route = createFileRoute("/members")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Members — The SRF CMC Core Team" },

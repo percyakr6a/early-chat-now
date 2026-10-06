@@ -5,6 +5,7 @@ import { SessionList } from "@/components/site/SessionList";
 import { getSessions } from "@/lib/srf.functions";
 
 export const Route = createFileRoute("/projects")({
+  staticData: { sitemap: false },
   loader: () => getSessions(),
   component: () => <Outlet />,
 });
