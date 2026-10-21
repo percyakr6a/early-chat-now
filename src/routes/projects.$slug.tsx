@@ -177,6 +177,16 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
                 <div className="w-full max-w-md">
                   <p className="label-mono text-navy/60">{session.date_label}</p>
                   <h3 className="mt-3 text-2xl text-navy">CPR Workshop no. 1</h3>
+                  <p className="mt-2 text-sm text-navy/60">
+                    <a
+                      href="https://docs.google.com/spreadsheets/d/1eG00zgfEwo3H28gAL1yVxn1454AiS8i8omGHYh50nH0/edit?usp=sharing"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="label-mono underline decoration-navy/30 underline-offset-4 transition-colors hover:text-navy hover:decoration-navy"
+                    >
+                      list of select participants ↗
+                    </a>
+                  </p>
                   <div className="mt-5 space-y-3.5">
                     {CPR_SESSIONS.map((s) => {
                       const full = s.filled >= s.capacity;
