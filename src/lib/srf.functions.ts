@@ -84,3 +84,141 @@ export const getCoreMembers = createServerFn({ method: "GET" }).handler(async ()
     .order("sort_order");
   return data ?? [];
 });
+
+
+// ---- "Check your spot" lookup ----
+// Reads the public participants Google Sheet for CPR Workshop no. 1 (one tab
+// per session) so the sheet remains the single source of truth.
+
+const SPOT_SHEET_ID = "1eG00zgfEwo3H28gAL1yVxn1454AiS8i8omGHYh50nH0";
+const SPOT_SHEET_GIDS = [0, 921439454, 45477592, 1279792590];
+const SPOT_VENUE = "Seminar Hall, Surgery 2 Ward, CMC Hospital";
+const SPOT_WORKSHOP = "CPR Workshop no. 1";
+
+export type SpotResult =
+  | {
+      found: true;
+      name: string;
+      batchRoll: string;
+      workshop: string;
+      sessionNo: number;
+      sessionDate: string;
+      time: string;
+      venue: string;
+    }
+  | { found: false };
+
+function spotKey(value: string): string {
+  const digits = value.replace(/\D/g, "");
+  return digits ? String(Number(digits)) : value.trim().toLowerCase();
+}
+
+function batchRollKey(value: string): { batch: string; roll: string } | null {
+  const numbers = value.match(/\d+/g);
+  if (!numbers || numbers.length < 2) return null;
+  return { batch: String(Number(numbers[0])), roll: String(Number(numbers[1])) };
+}
+
+function parseCsvRows(text: string): string[][] {
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let field = "";
+  let inQuotes = false;
+  for (let i = 0; i < text.length; i += 1) {
+    const char = text[i];
+    if (inQuotes) {
+      if (char === '"') {
+        if (text[i + 1] === '"') {
+          field += '"';
+          i += 1;
+        } else {
+          inQuotes = false;
+        }
+      } else {
+        field += char;
+      }
+    } else if (char === '"') {
+      inQuotes = true;
+    } else if (char === ",") {
+      row.push(field);
+      field = "";
+    } else if (char === "\n") {
+      row.push(field);
+      rows.push(row);
+      row = [];
+      field = "";
+    } else if (char !== "\r") {
+      field += char;
+    }
+  }
+  if (field !== "" || row.length > 0) {
+    row.push(field);
+    rows.push(row);
+  }
+  return rows;
+}
+
+type SpotTab = {
+  day: number;
+  dateLabel: string;
+  people: { batchRoll: string; name: string }[];
+};
+
+function parseSpotTab(rows: string[][]): SpotTab | null {
+  const header = rows[0]?.[1] ?? "";
+  const dateLabel = header.split(";")[1]?.trim() ?? "";
+  const dayMatch = dateLabel.match(/(\d{1,2})/);
+  if (!dateLabel || !dayMatch) return null;
+  const people = rows
+    .slice(2)
+    .map((row) => ({ batchRoll: (row[1] ?? "").trim(), name: (row[2] ?? "").trim() }))
+    .filter((person) => person.batchRoll && person.name);
+  if (!people.length) return null;
+  return { day: Number(dayMatch[1]), dateLabel, people };
+}
+
+export const findMySpot = createServerFn({ method: "GET" })
+  .inputValidator((input: { batch: string; rollNo: string }) => input)
+  .handler(async ({ data }): Promise<SpotResult> => {
+    const batch = spotKey(data.batch);
+    const roll = spotKey(data.rollNo);
+    if (!batch || !roll) return { found: false };
+
+    const responses = await Promise.all(
+      SPOT_SHEET_GIDS.map((gid) =>
+        fetch(`https://docs.google.com/spreadsheets/d/${SPOT_SHEET_ID}/gviz/tq?tqx=out:csv&gid=${gid}`, {
+          headers: { Accept: "text/csv" },
+          signal: AbortSignal.timeout(8000),
+        })
+          .then((response) => (response.ok ? response.text() : ""))
+          .catch(() => ""),
+      ),
+    );
+
+    const tabs = responses
+      .map((text) => (text ? parseSpotTab(parseCsvRows(text)) : null))
+      .filter((tab): tab is SpotTab => tab !== null)
+      .sort((a, b) => a.day - b.day)
+      .map((tab, index) => ({ ...tab, sessionNo: index + 1 }));
+
+    if (!tabs.length) throw new Error("Participant list is unavailable right now");
+
+    for (const tab of tabs) {
+      for (const person of tab.people) {
+        const key = batchRollKey(person.batchRoll);
+        if (key && key.batch === batch && key.roll === roll) {
+          return {
+            found: true,
+            name: person.name,
+            batchRoll: person.batchRoll.replace(/\s*-\s*/g, " - ").trim(),
+            workshop: SPOT_WORKSHOP,
+            sessionNo: tab.sessionNo,
+            sessionDate: tab.dateLabel,
+            time: "TBA",
+            venue: SPOT_VENUE,
+          };
+        }
+      }
+    }
+    return { found: false };
+  });

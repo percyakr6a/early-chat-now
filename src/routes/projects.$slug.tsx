@@ -6,6 +6,7 @@ import cprWorkshop from "@/assets/cpr-workshop-poster.jpg";
 import researchDiscourse from "@/assets/research-discourse-poster.jpg";
 import { Button } from "@/components/ui/button";
 import { PageShell, SectionLabel } from "@/components/site/PageShell";
+import { SpotCheck } from "@/components/site/SpotCheck";
 import { getSessionBySlug } from "@/lib/srf.functions";
 import { formUrlFor } from "@/lib/project-links";
 
@@ -89,10 +90,11 @@ function ProjectDetail() {
   );
 }
 
-const CPR_SESSIONS = [
-  { no: 1, filled: 25, capacity: 25 },
-  { no: 2, filled: 25, capacity: 25 },
-  { no: 3, filled: 18, capacity: 25 },
+const WORKSHOP_ONE_SESSIONS = [
+  { no: 1, filled: 40, capacity: 40, date: "2 Nov, Monday" },
+  { no: 2, filled: 40, capacity: 40, date: "3 Nov, Tuesday" },
+  { no: 3, filled: 40, capacity: 40, date: "4 Nov, Wednesday" },
+  { no: 4, filled: 40, capacity: 40, date: "5 Nov, Thursday" },
 ];
 
 function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderData> }) {
@@ -110,10 +112,10 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
           <p className="label-mono mt-12 text-navy/70">SRF CMC / HANDS-ON TRAINING</p>
           <h1 className="mt-5 max-w-4xl text-5xl leading-[0.98] md:text-8xl">The CPR Project.</h1>
           <p className="label-mono mt-5 text-navy/70">A hands-on training programme by the Directorate of Professional Health Education, SMBBMU</p>
-          <p className="mt-7 max-w-2xl text-lg leading-relaxed text-navy md:text-xl">Designed to introduce Basic-Life-Saving cardio-pulmonary resuscitation at Chandka with the objective of having it accessibly learned by everyone on-campus.</p>
+          <p className="mt-7 max-w-2xl text-lg leading-relaxed text-navy md:text-xl">Designed to introduce Basic Life Saving cardio-pulmonary resuscitation at Chandka with the objective of having it accessibly learned by everyone on-campus.</p>
           <div className="mt-8 flex flex-wrap items-center gap-5">
             <Button asChild variant="secondary" className="h-auto rounded-md px-6 py-4 font-bold">
-              <a href={formUrlFor(session.slug)} target="_blank" rel="noopener noreferrer">Register via Google Form <ArrowUpRight /></a>
+              <a href="#spot-check">Check your spot</a>
             </Button>
             <span className="label-mono text-navy/85">{session.date_label}</span>
           </div>
@@ -150,7 +152,7 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { label: "Eligibility", value: "Open to all SMBBMU students" },
-              { label: "Format", value: "Small-group hands-on, 25 per session" },
+              { label: "Format", value: "Small-group hands-on, 40 per session" },
               { label: "Fee", value: "Free of cost" },
               { label: "Venue", value: "To be announced" },
             ].map((fact) => (
