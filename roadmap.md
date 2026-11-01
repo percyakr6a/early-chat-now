@@ -1,3 +1,6 @@
 - [x] Expand the CPR project page with a description, interactive training total, registration, and session history/upcoming areas.
 - [x] Verify the CPR and other project pages on desktop and mobile.
-- [x] Replace the CPR page background with a workshop graphic inspired by the supplied reference, without copying its university branding or claims.
+- [x] Replace the CPR project page background with a workshop graphic inspired by the supplied reference, without copying its university branding or claims.
+- [ ] Build a "Check your spot" lookup on the CPR page (batch + roll no → name, batch, roll no, workshop no, session, date, time, venue); data source from user TBD.
+- [ ] CPR Workshop no. 1: 4 sessions, 40 members each, all full; date 2–5 November; venue Seminar Hall, Surgery 2 Ward, CMC Hospital; move to Previous sessions.
+- [ ] Open a new CPR Workshop no. 2 spot with TBA date, venue, and sessions.
