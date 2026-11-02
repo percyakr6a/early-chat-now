@@ -12,3 +12,5 @@
 - Keep the projects overview in the projects.index leaf and the projects parent rendering Outlet; individual project URLs are children and must not be covered by the overview.
 - Keep project-specific presentations within the shared project detail route and branch by slug; this preserves existing project URLs and leaves other projects on the generic template.
 - Do not infer a CPR trained count from registrations; only display a verified attendance figure when supplied, because sign-ups are not completed training.
+- The "Check your spot" lookup reads the public participants Google Sheet live (one tab per session) and derives session numbers from each tab's date, never from the tab's "Session N" label — the sheet's labels can be misnumbered; keep the sheet as the single source of truth.
+

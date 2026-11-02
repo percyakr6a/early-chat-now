@@ -176,8 +176,27 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
               <h2 className="mt-5 text-3xl text-navy md:text-5xl">Upcoming dates.</h2>
               <div className="mt-8 flex items-start gap-4 border-t border-border pt-7">
                 <CalendarDays className="mt-1 size-6 shrink-0 text-navy" strokeWidth={1.5} />
+                <div>
+                  <p className="label-mono text-navy/60">DATE TBA</p>
+                  <h3 className="mt-3 text-2xl text-navy">CPR Workshop no. 2</h3>
+                  <p className="mt-3 max-w-md text-base leading-relaxed text-navy/70">
+                    The next hands-on CPR training. Date, venue and session details to be announced.
+                  </p>
+                  <div className="mt-5 space-y-1.5">
+                    <p className="label-mono text-navy/60">SESSIONS: TBA</p>
+                    <p className="label-mono text-navy/60">VENUE: TBA</p>
+                  </div>
+                  {session.registration_open && <Button asChild variant="secondary" className="mt-7 h-auto rounded-md px-5 py-3 font-bold"><a href={formUrlFor(session.slug)} target="_blank" rel="noopener noreferrer">Register <ArrowUpRight /></a></Button>}
+                </div>
+              </div>
+            </div>
+            <div className="border-t-2 border-navy pt-6">
+              <p className="label-mono text-navy/60">02 / THE ARCHIVES</p>
+              <h2 className="mt-5 text-3xl text-navy md:text-5xl">Previous sessions.</h2>
+              <div className="mt-8 flex items-start gap-4 border-t border-border pt-7">
+                <CalendarDays className="mt-1 size-6 shrink-0 text-navy" strokeWidth={1.5} />
                 <div className="w-full max-w-md">
-                  <p className="label-mono text-navy/60">{session.date_label}</p>
+                  <p className="label-mono text-navy/60">2-5 NOVEMBER</p>
                   <h3 className="mt-3 text-2xl text-navy">CPR Workshop no. 1</h3>
                   <p className="mt-2 text-sm text-navy/60">
                     <a
@@ -189,8 +208,9 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
                       list of select participants ↗
                     </a>
                   </p>
-                  <div className="mt-5 space-y-3.5">
-                    {CPR_SESSIONS.map((s) => {
+                  <p className="label-mono mt-5 text-navy/60">4 SESSIONS - 40 STUDENTS EACH</p>
+                  <div className="mt-3.5 space-y-3.5">
+                    {WORKSHOP_ONE_SESSIONS.map((s) => {
                       const full = s.filled >= s.capacity;
                       const pct = Math.round((s.filled / s.capacity) * 100);
                       return (
@@ -206,22 +226,14 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
                           >
                             <div className={`h-full rounded-full ${full ? "bg-navy" : "bg-lime"}`} style={{ width: `${pct}%` }} />
                           </div>
-                          <p className="label-mono mt-0.5 text-xs text-navy/60"></p>
+                          <p className="label-mono mt-0.5 text-xs text-navy/60">{s.date.toUpperCase()}</p>
                         </div>
                       );
                     })}
                   </div>
-                  <p className="label-mono mt-5 whitespace-pre-line text-navy/60">{session.meta}</p>
-                  {session.registration_open && <Button asChild variant="secondary" className="mt-7 h-auto rounded-md px-5 py-3 font-bold"><a href={formUrlFor(session.slug)} target="_blank" rel="noopener noreferrer">Register <ArrowUpRight /></a></Button>}
+                  <p className="label-mono mt-5 text-navy/60">VENUE: SEMINAR HALL, SURGERY 2 WARD, CMC HOSPITAL</p>
+                  <SpotCheck />
                 </div>
-              </div>
-            </div>
-            <div className="border-t-2 border-navy pt-6">
-              <p className="label-mono text-navy/60">02 / THE ARCHIVES</p>
-              <h2 className="mt-5 text-3xl text-navy md:text-5xl">Previous sessions.</h2>
-              <div className="mt-8 border-t border-border pt-7">
-                <p className="text-lg text-navy/70">No previous sessions listed yet.</p>
-                <p className="mt-3 max-w-md text-sm leading-relaxed text-navy/60">Past workshops will appear here once session details are available.</p>
               </div>
             </div>
           </div>
