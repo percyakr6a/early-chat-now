@@ -119,7 +119,7 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
             </Button>
             <span className="label-mono text-navy/85">{session.date_label}</span>
           </div>
-          <p className="label-mono mt-8 text-navy/70">Illustrative image</p>
+          <p className="label-mono mt-8 text-navy/70"></p>
         </div>
       </section>
 
