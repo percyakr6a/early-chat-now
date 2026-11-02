@@ -91,10 +91,10 @@ function ProjectDetail() {
 }
 
 const WORKSHOP_ONE_SESSIONS = [
-  { no: 1, filled: 40, capacity: 40, date: "2 Nov, Monday" },
-  { no: 2, filled: 40, capacity: 40, date: "3 Nov, Tuesday" },
-  { no: 3, filled: 40, capacity: 40, date: "4 Nov, Wednesday" },
-  { no: 4, filled: 40, capacity: 40, date: "5 Nov, Thursday" },
+  { no: 1, filled: 40, capacity: 40, date: "" },
+  { no: 2, filled: 40, capacity: 40, date: "" },
+  { no: 3, filled: 40, capacity: 40, date: "" },
+  { no: 4, filled: 40, capacity: 40, date: "" },
 ];
 
 function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderData> }) {
@@ -216,7 +216,7 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
                       return (
                         <div key={s.no}>
                           <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-                            <p className="label-mono text-xs text-navy/60">SESSION NO. {s.no} -&nbsp;{s.filled}&nbsp;/&nbsp;{s.capacity}&nbsp;SEATS FILLED</p>
+                            <p className="label-mono text-xs text-navy/60">{s.no} NOV, {s.no === 1 ? "MONDAY" : s.no === 2 ? "TUESDAY" : s.no === 3 ? "WEDNESDAY" : "THURSDAY"}&nbsp;-&nbsp;{s.filled}&nbsp;/&nbsp;{s.capacity}&nbsp;SEATS FILLED</p>
                             <p className="text-xs font-bold text-navy">{full ? "Full" : `${s.capacity - s.filled} spots left`}</p>
                           </div>
                           <div
