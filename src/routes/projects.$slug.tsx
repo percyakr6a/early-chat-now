@@ -91,10 +91,10 @@ function ProjectDetail() {
 }
 
 const WORKSHOP_ONE_SESSIONS = [
-  { no: 1, filled: 40, date: "2nd Nov" },
-  { no: 2, filled: 40, date: "3rd Nov" },
-  { no: 3, filled: 40, date: "4th Nov" },
-  { no: 4, filled: 40, date: "5th Nov" },
+  { no: 1, filled: 40, capacity: 40, date: "2 Nov, Monday" },
+  { no: 2, filled: 40, capacity: 40, date: "3 Nov, Tuesday" },
+  { no: 3, filled: 40, capacity: 40, date: "4 Nov, Wednesday" },
+  { no: 4, filled: 40, capacity: 40, date: "5 Nov, Thursday" },
 ];
 
 function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderData> }) {
@@ -208,13 +208,28 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
                       list of select participants ↗
                     </a>
                   </p>
-                  <p className="label-mono mt-5 text-navy/60">4 SESSIONS - 40 STUDENTS EACH</p>
-                  <div className="mt-3.5 space-y-1.5">
-                    {WORKSHOP_ONE_SESSIONS.map((s) => (
-                      <p key={s.no} className="text-sm text-navy/80">
-                        {s.no}. {s.date} - {s.filled} students trained
-                      </p>
-                    ))}
+                  <p className="label-mono mt-4 text-navy/60">4 SESSIONS - 40 STUDENTS EACH</p>
+                  <div className="mt-3 space-y-2.5">
+                    {WORKSHOP_ONE_SESSIONS.map((s) => {
+                      const full = s.filled >= s.capacity;
+                      const pct = Math.round((s.filled / s.capacity) * 100);
+                      return (
+                        <div key={s.no}>
+                          <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+                            <p className="label-mono text-xs text-navy/60">SESSION NO. {s.no} -&nbsp;{s.filled}&nbsp;/&nbsp;{s.capacity}&nbsp;SEATS FILLED</p>
+                            <p className="text-xs font-bold text-navy">{full ? "Full" : `${s.capacity - s.filled} spots left`}</p>
+                          </div>
+                          <div
+                            className="mt-1 h-1.5 overflow-hidden rounded-full bg-navy/10"
+                            role="img"
+                            aria-label={`Session no. ${s.no}: ${s.filled} of ${s.capacity} seats filled`}
+                          >
+                            <div className={`h-full rounded-full ${full ? "bg-navy" : "bg-lime"}`} style={{ width: `${pct}%` }} />
+                          </div>
+                          <p className="label-mono mt-0.5 text-xs text-navy/60">{s.date.toUpperCase()}</p>
+                        </div>
+                      );
+                    })}
                   </div>
                   <p className="label-mono mt-5 text-navy/60">VENUE: SEMINAR HALL, SURGERY 2 WARD, CMC HOSPITAL</p>
                   <SpotCheck />
