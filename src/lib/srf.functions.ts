@@ -177,13 +177,17 @@ function parseSpotTab(rows: string[][]): SpotTab | null {
   return { day: Number(dayMatch[1]), dateLabel, people };
 }
 
-export const findMySpot = createServerFn({ method: "GET" })
-  .inputValidator((input: { batch: string; rollNo: string }) => input)
-  .handler(async ({ data }): Promise<SpotResult> => {
-    const batch = spotKey(data.batch);
-    const roll = spotKey(data.rollNo);
-    if (!batch || !roll) return { found: false };
+type SessionTab = SpotTab & { sessionNo: number };
 
+const SPOT_CACHE_TTL_MS = 5 * 60 * 1000;
+let spotCache: { at: number; tabs: SessionTab[] } | null = null;
+
+// Fetches and parses every participants tab; session numbers come from each
+// tab's date (never the tab's "Session N" label, which can be misnumbered).
+// Cached briefly so page loads don't hit Google on every request.
+async function loadSpotTabs(): Promise<SessionTab[]> {
+  if (spotCache && Date.now() - spotCache.at < SPOT_CACHE_TTL_MS) return spotCache.tabs;
+  try {
     const responses = await Promise.all(
       SPOT_SHEET_GIDS.map((gid) =>
         fetch(`https://docs.google.com/spreadsheets/d/${SPOT_SHEET_ID}/gviz/tq?tqx=out:csv&gid=${gid}`, {
@@ -194,14 +198,64 @@ export const findMySpot = createServerFn({ method: "GET" })
           .catch(() => ""),
       ),
     );
-
     const tabs = responses
       .map((text) => (text ? parseSpotTab(parseCsvRows(text)) : null))
       .filter((tab): tab is SpotTab => tab !== null)
       .sort((a, b) => a.day - b.day)
       .map((tab, index) => ({ ...tab, sessionNo: index + 1 }));
+    if (tabs.length) spotCache = { at: Date.now(), tabs };
+    return tabs;
+  } catch {
+    return spotCache?.tabs ?? [];
+  }
+}
 
-    if (!tabs.length) throw new Error("Participant list is unavailable right now");
+function batchGroup(batchRoll: string): string {
+  const match = batchRoll.trim().match(/^([A-Za-z]*)\s*(\d+)\s*(?:-\s*\d*)?$/);
+  if (!match) return "Other";
+  const prefix = match[1].trim().toUpperCase();
+  if (prefix === "DPT") return "DPT";
+  if (prefix === "PHARM") return "Pharmacy";
+  return `Batch ${Number(match[2])}`;
+}
+
+export type WorkshopOneSummary = {
+  total: number;
+  sessions: { sessionNo: number; dateLabel: string; listed: number }[];
+  batches: { label: string; count: number }[];
+};
+
+// Summary of the participants sheet for the CPR page: everyone listed per
+// session plus a batch-wise breakdown for the project-impact band.
+export const getWorkshopOneSummary = createServerFn({ method: "GET" }).handler(
+  async (): Promise<WorkshopOneSummary | null> => {
+    const tabs = await loadSpotTabs();
+    if (!tabs.length) return null;
+    const sessions = tabs.map((tab) => ({
+      sessionNo: tab.sessionNo,
+      dateLabel: tab.dateLabel.replace(/^0(?=\d)/, ""),
+      listed: tab.people.length,
+    }));
+    const counts = new Map<string, number>();
+    for (const tab of tabs) {
+      for (const person of tab.people) {
+        const label = batchGroup(person.batchRoll);
+        counts.set(label, (counts.get(label) ?? 0) + 1);
+      }
+    }
+    const batches = [...counts.entries()]
+      .map(([label, count]) => ({ label, count }))
+      .sort((a, b) => {
+        const na = Number(a.label.replace("Batch ", ""));
+        const nb = Number(b.label.replace("Batch ", ""));
+        if (Number.isFinite(na) && Number.isFinite(nb)) return na - nb;
+        if (Number.isFinite(na)) return -1;
+        if (Number.isFinite(nb)) return 1;
+        return a.label.localeCompare(b.label);
+      });
+    return { total: sessions.reduce((sum, s) => sum + s.listed, 0), sessions, batches };
+  },
+);
 
     for (const tab of tabs) {
       for (const person of tab.people) {
