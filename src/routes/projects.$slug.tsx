@@ -43,8 +43,8 @@ export const Route = createFileRoute("/projects/$slug")({
 });
 
 function ProjectDetail() {
-  const session = Route.useLoaderData();
-  if (session.slug === "bls-project") return <CPRProject session={session} />;
+  const { session, impact } = Route.useLoaderData();
+  if (session.slug === "bls-project") return <CPRProject session={session} impact={impact} />;
   if (session.slug === "research-discourse") return <ResearchDiscourse session={session} />;
 
   return (
@@ -95,11 +95,24 @@ function ProjectDetail() {
   );
 }
 
-const WORKSHOP_ONE_SESSIONS = [
-  { no: 1, filled: 40, capacity: 40, date: "" },
-  { no: 2, filled: 40, capacity: 40, date: "" },
-  { no: 3, filled: 40, capacity: 40, date: "" },
-  { no: 4, filled: 40, capacity: 40, date: "" },
+// Used only while the participants sheet can't be reached; the live numbers
+// come from getWorkshopOneSummary (read on 2 Nov 2026).
+const SEAT_CAPACITY = 40;
+const FALLBACK_SESSIONS = [
+  { sessionNo: 1, dateLabel: "2 NOV, MONDAY", listed: 46 },
+  { sessionNo: 2, dateLabel: "3 NOV, TUESDAY", listed: 27 },
+  { sessionNo: 3, dateLabel: "4 NOV, WEDNESDAY", listed: 37 },
+  { sessionNo: 4, dateLabel: "5 NOV, THURSDAY", listed: 22 },
+];
+const FALLBACK_TOTAL = 132;
+const FALLBACK_BATCHES = [
+  { label: "Batch 50", count: 4 },
+  { label: "Batch 51", count: 18 },
+  { label: "Batch 52", count: 18 },
+  { label: "Batch 53", count: 52 },
+  { label: "Batch 54", count: 34 },
+  { label: "DPT", count: 4 },
+  { label: "Pharmacy", count: 2 },
 ];
 
 function CPRProject({
