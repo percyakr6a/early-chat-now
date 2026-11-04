@@ -216,7 +216,7 @@ function batchGroup(batchRoll: string): string {
   const prefix = match[1].trim().toUpperCase();
   if (prefix === "DPT") return "DPT";
   if (prefix === "PHARM") return "Pharmacy";
-  return `Batch ${Number(match[2])}`;
+  return `Batch ${Number(match[2] ?? 0)}`;
 }
 
 export type WorkshopOneSummary = {
