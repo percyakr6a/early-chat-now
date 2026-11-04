@@ -7,7 +7,11 @@ import researchDiscourse from "@/assets/research-discourse-poster.jpg";
 import { Button } from "@/components/ui/button";
 import { PageShell, SectionLabel } from "@/components/site/PageShell";
 import { SpotCheck } from "@/components/site/SpotCheck";
-import { getSessionBySlug } from "@/lib/srf.functions";
+import {
+  getSessionBySlug,
+  getWorkshopOneSummary,
+  type WorkshopOneSummary,
+} from "@/lib/srf.functions";
 import { formUrlFor } from "@/lib/project-links";
 
 export const Route = createFileRoute("/projects/$slug")({
@@ -15,19 +19,20 @@ export const Route = createFileRoute("/projects/$slug")({
   loader: async ({ params }) => {
     const session = await getSessionBySlug({ data: params.slug });
     if (!session) throw notFound();
-    return session;
+    const impact = session.slug === "bls-project" ? await getWorkshopOneSummary() : null;
+    return { session, impact };
   },
   head: ({ loaderData }) => ({
     meta: [
-      { title: loaderData ? `${loaderData.title} — SRF CMC` : "Project — SRF CMC" },
+      { title: loaderData ? `${loaderData.session.title} — SRF CMC` : "Project — SRF CMC" },
       {
         name: "description",
-        content: loaderData?.description ?? "A project by the Student Research Forum, CMC Larkana.",
+        content: loaderData?.session.description ?? "A project by the Student Research Forum, CMC Larkana.",
       },
-      { property: "og:title", content: loaderData ? `${loaderData.title} — SRF CMC` : "Project — SRF CMC" },
+      { property: "og:title", content: loaderData ? `${loaderData.session.title} — SRF CMC` : "Project — SRF CMC" },
       {
         property: "og:description",
-        content: loaderData?.description ?? "A project by the Student Research Forum, CMC Larkana.",
+        content: loaderData?.session.description ?? "A project by the Student Research Forum, CMC Larkana.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -97,7 +102,13 @@ const WORKSHOP_ONE_SESSIONS = [
   { no: 4, filled: 40, capacity: 40, date: "" },
 ];
 
-function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderData> }) {
+function CPRProject({
+  session,
+  impact,
+}: {
+  session: ReturnType<typeof Route.useLoaderData>["session"];
+  impact: WorkshopOneSummary | null;
+}) {
   const [showCountInfo, setShowCountInfo] = useState(false);
 
   return (
@@ -137,12 +148,24 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
               <span className="flex size-16 shrink-0 items-center justify-center rounded-full border border-navy/40 md:size-20"><HeartPulse className="size-8 md:size-10" strokeWidth={1.5} /></span>
               <span className="flex flex-col items-start gap-1">
                 <span className="label-mono">Project impact</span>
-                <span className="text-2xl font-bold md:text-3xl">Students trained so far <span className="font-bold"> 75</span></span>
+                <span className="text-2xl font-bold md:text-3xl">Students trained so far — <span className="font-bold">{impact?.total ?? FALLBACK_TOTAL}</span></span>
               </span>
             </span>
             <ChevronDown className={`ml-4 size-5 shrink-0 transition-transform ${showCountInfo ? "rotate-180" : ""}`} />
           </Button>
-          {showCountInfo && <p id="trained-count-info" className="mt-5 max-w-xl text-sm leading-relaxed text-navy/80">A verified training total has not been published yet. We’ll update this after attendance is confirmed.</p>}
+          {showCountInfo && (
+            <div id="trained-count-info" className="mt-5 max-w-xl">
+              <p className="label-mono text-navy/70">Trained batch-wise</p>
+              <ul className="mt-3 grid gap-x-10 gap-y-1.5 sm:grid-cols-2">
+                {(impact?.batches ?? FALLBACK_BATCHES).map((b) => (
+                  <li key={b.label} className="flex items-baseline justify-between gap-4 border-b border-navy/20 pb-1 text-sm text-navy">
+                    <span className="label-mono">{b.label}</span>
+                    <span className="font-bold">{b.count}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </section>
 
@@ -210,23 +233,22 @@ function CPRProject({ session }: { session: ReturnType<typeof Route.useLoaderDat
                   </p>
                   <p className="label-mono mt-4 text-navy/60">4 SESSIONS - 40 STUDENTS EACH</p>
                   <div className="mt-3 space-y-2.5">
-                    {WORKSHOP_ONE_SESSIONS.map((s) => {
-                      const full = s.filled >= s.capacity;
-                      const pct = Math.round((s.filled / s.capacity) * 100);
+                    {(impact?.sessions ?? FALLBACK_SESSIONS).map((s) => {
+                      const full = s.listed >= SEAT_CAPACITY;
+                      const pct = Math.min(100, Math.round((s.listed / SEAT_CAPACITY) * 100));
                       return (
-                        <div key={s.no}>
+                        <div key={s.sessionNo}>
                           <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-                            <p className="label-mono text-xs text-navy/60">{s.no} NOV, {s.no === 1 ? "MONDAY" : s.no === 2 ? "TUESDAY" : s.no === 3 ? "WEDNESDAY" : "THURSDAY"}&nbsp;-&nbsp;{s.filled}&nbsp;/&nbsp;{s.capacity}&nbsp;SEATS FILLED</p>
-                            <p className="text-xs font-bold text-navy">{full ? "Full" : `${s.capacity - s.filled} spots left`}</p>
+                            <p className="label-mono text-xs text-navy/60">{s.dateLabel.toUpperCase()}&nbsp;-&nbsp;{s.listed}&nbsp;/&nbsp;{SEAT_CAPACITY}&nbsp;SEATS FILLED</p>
+                            <p className="text-xs font-bold text-navy">{full ? "Full" : `${SEAT_CAPACITY - s.listed} spots left`}</p>
                           </div>
                           <div
                             className="mt-1 h-1.5 overflow-hidden rounded-full bg-navy/10"
                             role="img"
-                            aria-label={`Session no. ${s.no}: ${s.filled} of ${s.capacity} seats filled`}
+                            aria-label={`Session no. ${s.sessionNo}: ${s.listed} of ${SEAT_CAPACITY} seats filled`}
                           >
                             <div className={`h-full rounded-full ${full ? "bg-navy" : "bg-lime"}`} style={{ width: `${pct}%` }} />
                           </div>
-                          <p className="label-mono mt-0.5 text-xs text-navy/60">{s.date.toUpperCase()}</p>
                         </div>
                       );
                     })}
