@@ -216,7 +216,7 @@ function batchGroup(batchRoll: string): string {
   const prefix = match[1].trim().toUpperCase();
   if (prefix === "DPT") return "DPT";
   if (prefix === "PHARM") return "Pharmacy";
-  return `Batch ${Number(match[2])}`;
+  return `Batch ${Number(match[2] ?? 0)}`;
 }
 
 export type WorkshopOneSummary = {
@@ -256,6 +256,16 @@ export const getWorkshopOneSummary = createServerFn({ method: "GET" }).handler(
     return { total: sessions.reduce((sum, s) => sum + s.listed, 0), sessions, batches };
   },
 );
+
+export const findMySpot = createServerFn({ method: "GET" })
+  .inputValidator((input: { batch: string; rollNo: string }) => input)
+  .handler(async ({ data }): Promise<SpotResult> => {
+    const batch = spotKey(data.batch);
+    const roll = spotKey(data.rollNo);
+    if (!batch || !roll) return { found: false };
+
+    const tabs = await loadSpotTabs();
+    if (!tabs.length) throw new Error("Participant list is unavailable right now");
 
     for (const tab of tabs) {
       for (const person of tab.people) {
