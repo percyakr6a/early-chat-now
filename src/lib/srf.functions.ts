@@ -257,6 +257,16 @@ export const getWorkshopOneSummary = createServerFn({ method: "GET" }).handler(
   },
 );
 
+export const findMySpot = createServerFn({ method: "GET" })
+  .inputValidator((input: { batch: string; rollNo: string }) => input)
+  .handler(async ({ data }): Promise<SpotResult> => {
+    const batch = spotKey(data.batch);
+    const roll = spotKey(data.rollNo);
+    if (!batch || !roll) return { found: false };
+
+    const tabs = await loadSpotTabs();
+    if (!tabs.length) throw new Error("Participant list is unavailable right now");
+
     for (const tab of tabs) {
       for (const person of tab.people) {
         const key = batchRollKey(person.batchRoll);
