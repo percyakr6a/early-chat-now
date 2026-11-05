@@ -213,7 +213,7 @@ function CPRProject({
               <div className="mt-8 flex items-start gap-4 border-t border-border pt-7">
                 <CalendarDays className="mt-1 size-6 shrink-0 text-navy" strokeWidth={1.5} />
                 <div>
-                  <p className="label-mono text-navy/60">DATE TBA</p>
+                  <p className="label-mono text-navy/60">SESSION 2 - COMING SOON!</p>
                   <h3 className="mt-3 text-2xl text-navy">CPR Workshop no. 2</h3>
                   <p className="mt-3 max-w-md text-base leading-relaxed text-navy/70">
                     The next hands-on CPR training. Date, venue and session details to be announced.
