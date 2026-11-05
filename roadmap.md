@@ -4,3 +4,4 @@
 - [x] Build a "Check your spot" lookup on the CPR page (batch + roll no → name, batch, roll no, workshop no, session, date, time, venue); reads the participants Google Sheet live.
 - [x] CPR Workshop no. 1: 4 sessions, 40 members each, all full; date 2–5 November; venue Seminar Hall, Surgery 2 Ward, CMC Hospital; moved to Previous sessions.
 - [x] Open a new CPR Workshop no. 2 spot with TBA date, venue, and sessions.
+- [x] Update the CPR page after the participants list changed: seat bars and the "Students trained so far" total now read the participants sheet live (everyone listed per session), and the impact band expands into a batch-wise breakdown.
