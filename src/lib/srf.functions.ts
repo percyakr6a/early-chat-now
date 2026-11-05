@@ -213,7 +213,7 @@ async function loadSpotTabs(): Promise<SessionTab[]> {
 function batchGroup(batchRoll: string): string {
   const match = batchRoll.trim().match(/^([A-Za-z]*)\s*(\d+)\s*(?:-\s*\d*)?$/);
   if (!match) return "Other";
-  const prefix = match[1].trim().toUpperCase();
+  const prefix = (match[1] ?? "").trim().toUpperCase();
   if (prefix === "DPT") return "DPT";
   if (prefix === "PHARM") return "Pharmacy";
   return `Batch ${Number(match[2] ?? 0)}`;
