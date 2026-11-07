@@ -202,6 +202,38 @@ function CPRProject({
         </div>
       </section>
 
+      <section className="border-b border-border px-5 py-16 md:px-10 md:py-20">
+        <div className="mx-auto max-w-[1400px]">
+          <SectionLabel>THE PEOPLE BEHIND IT</SectionLabel>
+          <div className="mt-10 grid gap-4 lg:grid-cols-[1fr_1.4fr]">
+            <div className="rounded-2xl bg-navy p-7 text-primary-foreground">
+              <p className="label-mono opacity-70">Training partner</p>
+              <h3 className="mt-4 text-2xl leading-snug md:text-3xl">Directorate of Professional Health Education, SMBBMU</h3>
+              <p className="mt-4 text-base leading-relaxed opacity-80">Leads the hands-on CPR instruction and certifies every participant with an e-certificate.</p>
+            </div>
+            <div className="rounded-2xl border border-navy/15 bg-card p-7">
+              <p className="label-mono text-navy/60">SRF CMC coordinators</p>
+              <ul className="mt-5 divide-y divide-navy/10">
+                {[
+                  { initials: "MK", name: "Musadiq Kalhoro", role: "Founding Convener" },
+                  { initials: "AA", name: "Adil Abbasi", role: "Deputy Convener" },
+                  { initials: "IM", name: "Iqra Maqbool", role: "Organising Core - Head" },
+                  { initials: "MD", name: "Mahjabeen Detho", role: "Organising Core - Co-Head" },
+                ].map((p) => (
+                  <li key={p.name} className="flex items-center gap-4 py-3">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-navy text-sm font-bold text-primary-foreground">{p.initials}</span>
+                    <span className="flex flex-1 flex-wrap items-baseline justify-between gap-x-4">
+                      <span className="text-lg font-bold text-navy">{p.name}</span>
+                      <span className="label-mono text-navy/60">{p.role}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       <section className="px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto max-w-[1400px]">
