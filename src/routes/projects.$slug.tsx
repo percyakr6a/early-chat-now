@@ -234,14 +234,23 @@ function CPRProject({
                 <div className="w-full max-w-md">
                   <p className="label-mono text-navy/60">2-5 NOVEMBER</p>
                   <h3 className="mt-3 text-2xl text-navy">CPR Workshop no. 1</h3>
-                  <p className="mt-2 text-sm text-navy/60">
+                  <p className="mt-2 flex flex-wrap items-center gap-2 text-sm text-navy/60">
                     <a
                       href="https://docs.google.com/spreadsheets/d/1eG00zgfEwo3H28gAL1yVxn1454AiS8i8omGHYh50nH0/edit?usp=sharing"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="label-mono underline decoration-navy/30 underline-offset-4 transition-colors hover:text-navy hover:decoration-navy"
                     >
-                      list of select participants ↗
+                      LIST OF SELECT PARTICIPANTS ↗
+                    </a>
+                    <span aria-hidden="true">•</span>
+                    <a
+                      href="https://www.instagram.com/reel/DfZr6vQIOjX/?utm_source=ig_web_copy_link&vrfl=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA=="
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="label-mono underline decoration-navy/30 underline-offset-4 transition-colors hover:text-navy hover:decoration-navy"
+                    >
+                      MEDIA INTEXT ↗
                     </a>
                   </p>
                   <p className="label-mono mt-4 text-navy/60">4 SESSIONS - 40 STUDENTS EACH</p>
