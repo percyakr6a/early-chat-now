@@ -250,7 +250,7 @@ function CPRProject({
                       rel="noopener noreferrer"
                       className="label-mono underline decoration-navy/30 underline-offset-4 transition-colors hover:text-navy hover:decoration-navy"
                     >
-                      MEDIA INTEXT ↗
+                      MEDIA REEL ↗
                     </a>
                   </p>
                   <p className="label-mono mt-4 text-navy/60">4 SESSIONS - 40 STUDENTS EACH</p>
