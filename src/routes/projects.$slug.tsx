@@ -253,7 +253,7 @@ function CPRProject({
                         <div key={s.sessionNo}>
                           <div className="flex flex-wrap items-baseline justify-between gap-x-4">
                             <p className="label-mono text-xs text-navy/60">{s.dateLabel.toUpperCase()}&nbsp;-&nbsp;{s.listed}&nbsp;/&nbsp;{SEAT_CAPACITY}&nbsp;SEATS FILLED</p>
-                            <p className="text-xs font-bold text-navy">{full ? "Full" : `${SEAT_CAPACITY - s.listed} spots left`}</p>
+                            <p className="text-xs font-bold text-navy">{full ? "Full" : "-"}</p>
                           </div>
                           <div
                             className="mt-1 h-1.5 overflow-hidden rounded-full bg-navy/10"
