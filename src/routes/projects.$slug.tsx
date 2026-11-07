@@ -246,8 +246,6 @@ function CPRProject({
                     <span aria-hidden="true">•</span>
                     <a
                       href="https://www.instagram.com/reel/DfZr6vQIOjX/?utm_source=ig_web_copy_link&vrfl=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA=="
-                      target="_blank"
-                      rel="noopener noreferrer"
                       className="label-mono underline decoration-navy/30 underline-offset-4 transition-colors hover:text-navy hover:decoration-navy"
                     >
                       MEDIA REEL ↗
