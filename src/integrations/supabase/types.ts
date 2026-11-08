@@ -166,6 +166,39 @@ export type Database = {
         }
         Relationships: []
       }
+      spot_lookups: {
+        Row: {
+          batch_input: string
+          created_at: string
+          found: boolean
+          id: string
+          matched_name: string | null
+          roll_input: string
+          session_date: string | null
+          session_no: number | null
+        }
+        Insert: {
+          batch_input?: string
+          created_at?: string
+          found?: boolean
+          id?: string
+          matched_name?: string | null
+          roll_input?: string
+          session_date?: string | null
+          session_no?: number | null
+        }
+        Update: {
+          batch_input?: string
+          created_at?: string
+          found?: boolean
+          id?: string
+          matched_name?: string | null
+          roll_input?: string
+          session_date?: string | null
+          session_no?: number | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
