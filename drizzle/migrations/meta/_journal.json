@@ -8,6 +8,13 @@
       "when": 1789880538199,
       "tag": "0000_srf_cmc_core",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794121164980,
+      "tag": "0001_spot_lookups",
+      "breakpoints": true
     }
   ]
 }
