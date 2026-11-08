@@ -260,6 +260,28 @@ export const getWorkshopOneSummary = createServerFn({ method: "GET" }).handler(
 export const findMySpot = createServerFn({ method: "GET" })
   .inputValidator((input: { batch: string; rollNo: string }) => input)
   .handler(async ({ data }): Promise<SpotResult> => {
+    const result = await lookupSpot(data);
+    await logSpotLookup(data, result);
+    return result;
+  });
+
+async function logSpotLookup(input: { batch: string; rollNo: string }, result: SpotResult) {
+  try {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    await supabaseAdmin.from("spot_lookups").insert({
+      batch_input: String(input.batch ?? "").slice(0, 50),
+      roll_input: String(input.rollNo ?? "").slice(0, 50),
+      found: result.found,
+      matched_name: result.found ? result.name : null,
+      session_no: result.found ? result.sessionNo : null,
+      session_date: result.found ? result.sessionDate : null,
+    });
+  } catch (error) {
+    console.error("spot lookup log failed", error);
+  }
+}
+
+async function lookupSpot(data: { batch: string; rollNo: string }): Promise<SpotResult> {
     const batch = spotKey(data.batch);
     const roll = spotKey(data.rollNo);
     if (!batch || !roll) return { found: false };
@@ -285,4 +307,4 @@ export const findMySpot = createServerFn({ method: "GET" })
       }
     }
     return { found: false };
-  });
+}
