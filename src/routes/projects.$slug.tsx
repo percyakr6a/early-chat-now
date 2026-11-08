@@ -292,7 +292,7 @@ function CPRProject({
             </div>
             <div className="rounded-2xl border border-navy/15 bg-card p-7">
               <p className="label-mono text-navy/60">SRF CMC coordinators</p>
-              <ul className="mt-5 divide-y divide-navy/10">
+              <ul className="mt-5 grid grid-cols-1 gap-x-5 sm:grid-cols-2">
                 {[
                   { initials: "MK", name: "Musadiq Kalhoro" },
                   { initials: "IM", name: "Iqra Maqbool" },
@@ -302,7 +302,7 @@ function CPRProject({
                   { initials: "OT", name: "Omar Tunio" },
                   { initials: "SG", name: "Sana Gul" },
                 ].map((p) => (
-                  <li key={p.name} className="flex items-center gap-4 py-3">
+                  <li key={p.name} className="flex items-center gap-4 border-b border-navy/10 py-3">
                     <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-navy text-sm font-bold text-primary-foreground">{p.initials}</span>
                     <span className="text-lg font-bold text-navy">{p.name}</span>
                   </li>
