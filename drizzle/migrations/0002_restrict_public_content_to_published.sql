@@ -1,0 +1,12 @@
+ALTER TABLE public.sessions ADD COLUMN is_published boolean NOT NULL DEFAULT false;
+UPDATE public.sessions SET is_published = true WHERE is_published = false;
+ALTER TABLE public.journal_posts ADD COLUMN is_published boolean NOT NULL DEFAULT false;
+UPDATE public.journal_posts SET is_published = true WHERE is_published = false;
+ALTER TABLE public.core_members ADD COLUMN is_published boolean NOT NULL DEFAULT false;
+UPDATE public.core_members SET is_published = true WHERE is_published = false;
+DROP POLICY "Sessions are public" ON public.sessions;
+CREATE POLICY "Public can read published sessions" ON public.sessions FOR SELECT TO anon, authenticated USING (is_published);
+DROP POLICY "Journal is public" ON public.journal_posts;
+CREATE POLICY "Public can read published journal posts" ON public.journal_posts FOR SELECT TO anon, authenticated USING (is_published);
+DROP POLICY "Core members are public" ON public.core_members;
+CREATE POLICY "Public can read published core members" ON public.core_members FOR SELECT TO anon, authenticated USING (is_published);

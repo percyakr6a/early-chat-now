@@ -18,6 +18,7 @@ export type Database = {
         Row: {
           id: string
           initials: string
+          is_published: boolean
           name: string
           role_title: string
           sort_order: number
@@ -25,6 +26,7 @@ export type Database = {
         Insert: {
           id?: string
           initials: string
+          is_published?: boolean
           name: string
           role_title: string
           sort_order?: number
@@ -32,6 +34,7 @@ export type Database = {
         Update: {
           id?: string
           initials?: string
+          is_published?: boolean
           name?: string
           role_title?: string
           sort_order?: number
@@ -43,6 +46,7 @@ export type Database = {
           author: string
           excerpt: string
           id: string
+          is_published: boolean
           kicker: string
           published_on: string
           sort_order: number
@@ -52,6 +56,7 @@ export type Database = {
           author: string
           excerpt: string
           id?: string
+          is_published?: boolean
           kicker: string
           published_on: string
           sort_order?: number
@@ -61,6 +66,7 @@ export type Database = {
           author?: string
           excerpt?: string
           id?: string
+          is_published?: boolean
           kicker?: string
           published_on?: string
           sort_order?: number
@@ -128,6 +134,7 @@ export type Database = {
           date_label: string
           description: string
           id: string
+          is_published: boolean
           kicker: string
           meta: string
           note: string | null
@@ -142,6 +149,7 @@ export type Database = {
           date_label: string
           description: string
           id?: string
+          is_published?: boolean
           kicker: string
           meta: string
           note?: string | null
@@ -156,6 +164,7 @@ export type Database = {
           date_label?: string
           description?: string
           id?: string
+          is_published?: boolean
           kicker?: string
           meta?: string
           note?: string | null
