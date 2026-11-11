@@ -40,6 +40,7 @@ export const getSessions = createServerFn({ method: "GET" }).handler(async (): P
     supabase
       .from("sessions")
       .select("id, slug, kicker, date_label, title, description, note, meta, capacity, registration_open, sort_order")
+      .eq("is_published", true)
       .order("sort_order"),
     supabase.rpc("session_seat_counts"),
   ]);
@@ -70,6 +71,7 @@ export const getSessionBySlug = createServerFn({ method: "GET" })
       .from("sessions")
       .select("id, slug, kicker, date_label, title, description, note, meta, capacity, registration_open")
       .eq("slug", slug)
+      .eq("is_published", true)
       .maybeSingle();
     if (!s) return null;
     const { data: counts } = await supabase.rpc("session_seat_counts");
@@ -81,6 +83,7 @@ export const getCoreMembers = createServerFn({ method: "GET" }).handler(async ()
   const { data } = await publicClient()
     .from("core_members")
     .select("id, name, role_title, initials, sort_order")
+    .eq("is_published", true)
     .order("sort_order");
   return data ?? [];
 });
